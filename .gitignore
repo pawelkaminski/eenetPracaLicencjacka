@@ -1,6 +1,6 @@
-praca.aux
-praca.log
-praca.tex.bak
-praca.synctex.gz
-praca.toc
+*.aux
+*.log
+*.tex.bak
+*.synctex.gz
+*.toc
 *.pdf

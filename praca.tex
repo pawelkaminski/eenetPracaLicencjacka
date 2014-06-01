@@ -135,7 +135,6 @@ K\^un (fooistyczny mêdrzec, XIX w. p.n.e.):
 
 \begin{itemize}
 \item eenet -- Nazwa w³asna g³ównej aplikacji.
-\item Laboratorium EE -- Firma, zg³aszaj±ca zapotrzebowanie na eenet.
 \item framework -- Bezpo¶rednio t³umaczony jako zr±b, jest to szkielet do budowy aplikacji
 \item wtyczka -- Aplikacja korzystaj±ca z udogodnieñ ¶rodowiska zapewnianego przez eenet.
 \item wtyczki przyk³adowe -- Wtyczki, których wykonanie jest przewidziane w ramach wykonania aplikacji eenet.
@@ -146,13 +145,12 @@ K\^un (fooistyczny mêdrzec, XIX w. p.n.e.):
 \item front-end -- Czê¶æ kodu zapewniaj±ca graficzny i testowy interfejs, jest interpretowana przez przegl±darkê, tzn ¿e dzia³a po stronie u¿ytkownika.
 \item back-end -- Czê¶æ kodu dzia³aj±ca po stronie serwera, odpowiada za logikê operacji na danych.
 \item aplikacja internetowa -- Aplikacja w formie strony WWW, posiada front-end i back-end.
-\item one page application -- Podczas u¿ytkowania aplikacji typu "one page" nigdy nie zostaje prze³adowana strona, dane pomiêdzy klientem a serwerem, s± przesy³ane przy pomocy zapytañ asynchronicznych.
+\item \textit{single page application} -- Podczas u¿ytkowania aplikacji tego typu nigdy nie zostaje prze³adowana strona, dane pomiêdzy klientem a serwerem, s± przesy³ane przy pomocy zapytañ asynchronicznych.
 \item UX -- \textit{User experience}, do¶wiadczenia wizualne u¿ytkownika aplikacji internetowej, pozwalaj± okre¶liæ ³atwo¶æ, z jak± korzysta siê z aplikacji
-\item ma³e i ¶rednie przedsiêbiorstwa -- Przedsiêbiorstwa które zatrudniaj± od 10 do 250 pracowników.
 \item DRY -- \textit{Don`t repeat yourself}, regu³a stosowana podczas wytwarzania oprogramowania, zalecaj±ca unikanie ró¿nego rodzaju powtórzeñ wykonywanych przez programistów -- na przyk³ad unikanie tych samych czynno¶ci podczas kompilowania, unikanie wklejania (lub pisania) tych samych (lub bardzo podobnych) fragmentów kodu w wielu miejscach. W przypadku powtarzaj±cego siê kodu ¼ród³owego mo¿na separowaæ powtarzaj±cy siê fragment i jedynie odwo³ywaæ siê do niego.
-\item API -- \textit{application programming interface}; tutaj: ¶ci¶le okre¶lony zestaw regu³ i ich opisów, w jaki wtyczka komunikuje siê z aplikacj± eenet.
-\item Interface u¿ytkownika -- czê¶æ aplikacji odpowiedzialna za interakcjê z u¿ytkownikiem.
-
+\item API -- \textit{application programming interface}; tutaj: ¶ci¶le okre¶lony zestaw regu³ i ich opisów, w jaki front-end komunikuje siê z back-endem.
+\item REST -- \textit{representational state transfer}, wzorzec architektury oprogramowania standaryzuj±cy regu³y API.
+\item ma³e i ¶rednie przedsiêbiorstwa -- Przedsiêbiorstwa które zatrudniaj± od 10 do 250 pracowników.
 
 
 \end{itemize}
@@ -167,19 +165,59 @@ K\^un (fooistyczny mêdrzec, XIX w. p.n.e.):
 %TODO Patryk
 \chapter{Zastosowane rozwi±zania}\label{r:rozwiazania}
 
+\section{Ogólna struktura projektu}
+
+Zdecydowali¶my siê na realizacjê aplikacji internetowej jako interaktywnej strony WWW, co jest naturalnym wyborem patrz±c na to ile narzêdzi obecnie jest dostêpnych w taki sposób. Dodatkowo, za³o¿yli¶my, ¿e nasza strona powinna spe³niaæ wzorzec \textit{single-page application}, który wymusza ¶cis³y podzia³ projektu na API i GUI.
+
+\section{Instalacja projektu}
+
+Back-end eenetu zosta³ stworzony w zrêbie Django. S³u¿y on nastêpuj±cym celom:
+\begin{itemize}
+\item zapewnia mechanizm sesji zalogowanego u¿ytkownika,
+\item po¶redniczy w logowaniu i autoryzacji OAuth,
+\item zawiera w sobie koñcówki API, z którymi komunikuje siê GUI.
+\end{itemize}
+
+Do uruchomienia aplikacji w trybie dewelopersim (przy ustawionym \verb+DEBUG = True+ w ustawieniach projektu) wystarczy sam kod zapewniany przez Django, mianowicie plik \verb+manage.py+ -- Django zajmuje siê wówczas uruchomieniem serwera HTTP obs³uguj±cego zarówno ¿±dania zwi±zane z API, jak i serwowanie plików statycznych.
+
+Do instalacji produkcyjnej potrzeba jednak po¶rednicz±cego serwera-bramy, który zajmie siê serwowaniem plików statycznych i przekierowaniem odpowiednich ¿±dañ do Django. Zdecydowali¶my siê na serwer nginx z powodu popularno¶ci takiego po³±czenia Django-nginx. Oczywi¶cie zawsze jest mo¿liwo¶æ zmiany serwera-bramy na np. Apache2 czy lighttpd.
+
+Oprócz ustalenia serwera-bramy, nale¿y te¿ w jaki¶ sposób uruchomiæ serwer Django na produkcji. W tym celu u¿yli¶my narzêdzia supervisord, które powoduje, ¿e nie trzeba pisaæ osobnego daemona do procesu Django.
+
+eenet zosta³ przygotowany równie¿ na obs³ugê zadañ asynchronicznych -- czyli takich, które mo¿na zrobiæ osobnym procesem, nie spowalniaj±c renderowania odpowiedzi serwera. Przyk³adem tego mo¿e byæ pobieranie zdjêcia u¿ytkownika -- poniewa¿ autoryzacja u¿ytkowników odbywa siê przy pomocy Google OAuth, aplikacja eenet mo¿e wys³aæ ¿±danie do Google+ API o takowe zdjêcie. W celu wykonania tej funkcjonalno¶ci ponownie zwrócili¶my siê do rozwi±zañ popularnych -- wykorzystali¶my Celery, asynchroniczn± kolejkê zadañ w po³±czeniu z brokerem zadañ Rabbitmq.
+
+Z uwagi na to, ¿e postawienie pe³nego produkcyjnego serwera posiada wiele zale¿no¶ci, sporz±dzili¶my instrukcjê, która prowadzi administratora aplikacji krok po kroku, zaczynaj±c od stawiania instalacji deweloperskiej, poprzez produkcyjn±, a¿ po uruchamianie zadañ asynchronicznych. Znajduje siê ona w pliku \verb+README.md+.
+
+\section{Technologie wykorzystane do stworzenia API}
+
+Kluczow± rolê spe³nia wspomniany wcze¶niej framework Django. Oczekiwali¶my od back-endowego frameworku nastêpuj±cych funkcjonalno¶ci:
+\begin{itemize}
+\item ³atwy dostêp do bazy danych SQL,
+\item sesje u¿ytkowników,
+\item interfejs do administracji danymi dla administratora,
+\item mechanizm autoryzacji OAuth kompatybilny z Google OAuth,
+\item mo¿liwo¶æ ³atwego stworzenia wielu koñcówek API dostêpnych pod ró¿nymi adresami URL,
+\item narzucenie ograniczeñ na dostêp do koñcówek w zale¿no¶ci od przywilejów poszczególnych u¿ytkowników.
+\end{itemize}
+
+Dostêp do bazy danych, sesje u¿ytkowników i interfejs administracyjny s± zapewnione przez samo Django. Do obs³ugi OAuth zdecydowali¶my siê na \verb+django-social-auth+ (pó¼niej projekt przeistoczy³ siê w \verb+python-social-auth+), natomiast do stworzenia API u¿yli¶my \verb+django-rest-framework+.
+
+Przyjête przez nas rozwi±zania zdecydowanie u³atwi³y pracê z projektem i umo¿liwi³y skupienie siê na logice biznesowej.
+
+
+\section{Front-end}
+
+
+
+
 %TODO Patryk
 \chapter{W³o¿ona w projekt praca}\label{r:wlozonapraca}
 
 %TODO Pawe³
 \chapter{Osi±gniêcia}\label{r:osiagniecia}
-\section{Produkt}
-Wtyczki zawarte w aplikacji eenet zgodnie z za³o¿eniem s± u¿ywane przez pracowników firmy Laboratorium EE. ¦wiadczy o ponad 50 zarejestrowanych u¿ytkowników oraz du¿a liczba zg³oszonych przez nich b³êdów wewn±trz aplikacji. Problemy zg³aszane przez u¿ytkowników mia³y ró¿norakie pod³o¿e, poczynaj±c od b³êdów w t³umaczeniach, a koñcz±c na uwagach dotycz±cych zmian w interfacu u¿ytkownika. Ponadto planowane jest dalsze rozwijanie aplikacji przez przysz³ych praktykantów w Laboratorium EE. Co wiêcej eenet bêdzie sprzedawany w pakiecie wraz z innymi produktami firmy przeznaczonymi dla ma³ych i ¶rednich przedsiêbiorstw. 
-
-\section{Tworzenie produktu}
-Sposób w jaki powsta³a aplikacja, czas jej wykonania oraz jako¶æ wykonania zadowoli³ klienta na tyle, ¿e wszystkim cz³onkom zespo³u zosta³a zaproponowana dalsza wspó³praca, w nowych projektach.
 
 %TODO Borys ~ zmien nazwe/tresc zgodnie z twoimi oczekiwaniami
-\chapter{Wyczka Zasoby}\label{r:klucz}
+\chapter{Wtyczka Zasoby}\label{r:klucz}
 
 %TODO niby all ale i tak bedzie musiala napisac to jedna osoba - nie robert
 \chapter{Wykonana praca przez poszczególne osoby w projekcie}\label{r:ktopraca}

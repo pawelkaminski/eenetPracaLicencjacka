@@ -1,0 +1,183 @@
+%
+% Niniejszy plik stanowi przyk³ad formatowania pracy magisterskiej na
+% Wydziale MIM UW.  Szkielet u¿ytych poleceñ mo¿na wykorzystywaæ do
+% woli, np. formatujac wlasna prace.
+%
+% Zawartosc merytoryczna stanowi oryginalnosiagniecie
+% naukowosciowe Marcina Wolinskiego.  Wszelkie prawa zastrze¿one.
+%
+% Copyright (c) 2001 by Marcin Woliñski <M.Wolinski@gust.org.pl>
+% Poprawki spowodowane zmianami przepisów - Marcin Szczuka, 1.10.2004
+% Poprawki spowodowane zmianami przepisow i ujednolicenie 
+% - Seweryn Kar³owicz, 05.05.2006
+% dodaj opcjê [licencjacka] dla pracy licencjackiej
+\documentclass[licencjacka]{pracamgr}
+
+\usepackage{polski}
+
+%Jesli uzywasz kodowania polskich znakow ISO-8859-2 nastepna linia powinna byc 
+%odkomentowana
+\usepackage[latin2]{inputenc}
+%Jesli uzywasz kodowania polskich znakow CP-1250 to ta linia powinna byc 
+%odkomentowana
+%\usepackage[cp1250]{inputenc}
+
+% Dane magistranta:
+
+\author{Patryk Hes, Pawe³ Kamiñski, Borys Pop³awski, Robert Tomkowski}
+
+\nralbumu{320327, 320408, 320372, 321179}
+
+\title{Zr±b do aplikacji usprawniaj±cych pracê biurow±}
+
+\tytulang{Framework for application improving office work}
+
+%kierunek: Matematyka, Informatyka, ...
+\kierunek{Informatyka}
+
+% informatyka - nie okreslamy zakresu (opcja zakomentowana)
+% matematyka - zakres moze pozostac nieokreslony,
+% a jesli ma byc okreslony dla pracy mgr,
+% to przyjmuje jedna z wartosci:
+% {metod matematycznych w finansach}
+% {metod matematycznych w ubezpieczeniach}
+% {matematyki stosowanej}
+% {nauczania matematyki}
+% Dla pracy licencjackiej mamy natomiast
+% mozliwosc wpisania takiej wartosci zakresu:
+% {Jednoczesnych Studiow Ekonomiczno--Matematycznych}
+
+% \zakres{Tu wpisac, jesli trzeba, jedna z opcji podanych wyzej}
+
+% Praca wykonana pod kierunkiem:
+% (podaæ tytu³/stopieñ imiê i nazwisko opiekuna
+% Instytut
+% ew. Wydzia³ ew. Uczelnia (je¿eli nie MIM UW))
+\opiekun{dra Janusza Jab³onowskiego\\
+  }
+
+% miesi±c i~rok:
+\date{Czerwiec 2014}
+
+%Podaæ dziedzinê wg klasyfikacji Socrates-Erasmus:
+\dziedzina{ 
+%11.0 Matematyka, Informatyka:\\ 
+%11.1 Matematyka\\ 
+%11.2 Statystyka\\ 
+11.3 Informatyka\\ 
+}
+
+%Klasyfikacja tematyczna wedlug AMS (matematyka) lub ACM (informatyka)
+%TODO ZALEZY Z KTOREGO ROKU!!!!
+% http://www.acm.org/about/class/ccs98-html
+% http://dl.acm.org/ccs_flat.cfm#toc
+\klasyfikacja{Information systems\\
+  World Wide Web\\  
+  Web services\\
+  RESTful web services}
+
+
+% S³owa kluczowe:
+\keywords{zr±b, REST, WWW}%fa
+
+% Tu jest dobre miejsce na Twoje w³asne makra i~¶rodowiska:
+\newtheorem{defi}{Definicja}[section]
+
+% koniec definicji
+
+\begin{document}
+\maketitle
+
+%tu idzie streszczenie na strone poczatkowa
+\begin{abstract}
+
+\end{abstract}
+
+\tableofcontents
+%\listoffigures
+%\listoftables
+
+
+%TODO Robert/Pawe³ ~to chyba ma byæ krótkie natomiast sam pomys³ mo¿esz 
+\chapter*{Wprowadzenie}
+\addcontentsline{toc}{chapter}{Wprowadzenie}
+
+Blabalizator ró¿nicowy jest podstawowym narzêdziem blabalii
+fetorycznej.  Dlatego naukowcy z~ca³ego ¶wiata prze¶cigaj± siê
+w~próbach efektywnej implementacji.  Opracowana przez prof. Fifaka
+teoria fetorów $\sigma$-$\rho$ otwiera w~tej dziedzinie nowe
+mo¿liwo¶ci.  Wykorzystujemy je w~niniejszej pracy.
+
+Przystêpne wprowadzenie do blabalii fetorycznej mo¿na znale¼æ w~pracy
+Fifaka i~Gryzogrzechotalskiego \cite{ffgg}.  Dlatego w~niniejszym
+tek¶cie ograniczymy siê do przypomnienia pojêæ podstawowych.
+
+Praca sk³ada siê z~piêciu rozdzia³ów i~dodatków.
+W~rozdziale~\ref{r:pojecia} przypomniano podstawowe pojêcia blabalii
+fetorycznej.  Dotychczasowe próby implementacji blablizatora
+ró¿nicowego zestawiono w~rozdziale~\ref{r:losers}.
+Rozdzia³~\ref{r:fifak} przedstawia teoriê Fifaka i~wyja¶nia sposób jej
+wykorzystania w~implementacji blabalizatora.  W~rozdziale \ref{r:impl}
+przedstawiono algorytm blabalizy i~realizuj±cy go program komputerowy.
+Ostatni rozdzia³ zawiera przemy¶lenia dotycz±ce mo¿liwego wp³ywu
+dostêpno¶ci efektywnej blabalizy numerycznej na rozwój blabalii
+fetorycznej.  W~dodatkach umieszczono najciekawszy fragment programu,
+przyk³adowe dane i~wyniki dzia³ania programu.
+
+%TODO WSZYSCY WRZUCAJA TUTAJ JAK LECI CO JEST POTRZEBNE
+\chapter{Podstawowe pojêcia}\label{r:pojecia}
+
+Pojêciem pierwotnym blabalii fetorycznej jest \emph{blaba}.
+Blabali¶ci nie podaj± jego definicji, mówi±c za Ciach-Pfe t-\=am
+K\^un (fooistyczny mêdrzec, XIX w. p.n.e.):
+
+\section{Definicje}
+
+\begin{itemize}
+\item eenet --
+\end{itemize}
+
+%TODO Robert
+\chapter{Opis projektu}\label{r:opis}
+
+%TODO Pawe³
+\chapter{Rozwi±zania konkurencyjne}\label{r:konkurencja}
+\section{Bitbucket}
+%TODO Patryk
+\chapter{Zastosowane rozwi±zania}\label{r:rozwiazania}
+
+%TODO Patryk
+\chapter{W³o¿ona w projekt praca}\label{r:wlozonapraca}
+
+%TODO Pawe³
+\chapter{Osi±gniêcia}\label{r:osiagniecia}
+
+%TODO Borys ~ zmien nazwe/tresc zgodnie z twoimi oczekiwaniami
+\chapter{Wyczka Zasoby}\label{r:klucz}
+
+%TODO niby all ale i tak bedzie musiala napisac to jedna osoba - nie robert
+\chapter{Wykonana praca przez poszczególne osoby w projekcie}\label{r:ktopraca}
+
+%TODO niby all ale i tak bedzie musiala napisac to jedna osoba - nie robert
+\chapter{Zawarto¶æ kodu dostarczonego wraz z prac±}\label{r:kod}
+
+
+\begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{Bibliografia}
+
+\bibitem Dokumentacja AngularJS - https://docs.angularjs.org/api
+\bibitem Dokumentacja Lo-dash - http://lodash.com/docs
+\bibitem Dokumentacja jQuery - http://lodash.com/docs
+\bibitem Dokumentacja Django - https://docs.djangoproject.com/en/1.6/
+\bibitem Dokumentacja PosgreSQL - http://www.postgresql.org/docs/
+
+\end{thebibliography}
+
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% coding: latin-2
+%%% End:

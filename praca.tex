@@ -186,7 +186,7 @@ P³atny framework do tworzenia ma³ych aplikacji i pozwalaj±cy na handlowanie nimi
 
 Zdecydowali¶my siê na realizacjê aplikacji internetowej jako interaktywnej strony WWW, co jest naturalnym wyborem patrz±c na to ile narzêdzi obecnie jest dostêpnych w taki sposób. Dodatkowo, za³o¿yli¶my, ¿e nasza strona powinna spe³niaæ wzorzec \textit{single-page application}, który wymusza ¶cis³y podzia³ projektu na API i GUI.
 
-\section{Instalacja projektu}
+\section{Back-end: instalacja projektu}
 
 Back-end eenetu zosta³ stworzony w zrêbie Django. S³u¿y on nastêpuj±cym celom:
 \begin{itemize}
@@ -205,7 +205,7 @@ eenet zosta³ przygotowany równie¿ na obs³ugê zadañ asynchronicznych -- czyli tak
 
 Z uwagi na to, ¿e postawienie pe³nego produkcyjnego serwera posiada wiele zale¿no¶ci, sporz±dzili¶my instrukcjê, która prowadzi administratora aplikacji krok po kroku, zaczynaj±c od stawiania instalacji deweloperskiej, poprzez produkcyjn±, a¿ po uruchamianie zadañ asynchronicznych. Znajduje siê ona w pliku \verb+README.md+.
 
-\section{Technologie wykorzystane do stworzenia API}
+\section{Back-end: implementacja API}
 
 Kluczow± rolê spe³nia wspomniany wcze¶niej framework Django. Oczekiwali¶my od back-endowego frameworku nastêpuj±cych funkcjonalno¶ci:
 \begin{itemize}
@@ -222,7 +222,7 @@ Dostêp do bazy danych, sesje u¿ytkowników i interfejs administracyjny s± zapewni
 Przyjête przez nas rozwi±zania zdecydowanie u³atwi³y pracê z projektem i umo¿liwi³y skupienie siê na logice biznesowej.
 
 
-\section{Front-end: Javascript}
+\section{Front-end: JavaScript}
 
 Koncepcja stron internetowych typu \textit{single-page application} pojawi³a siê w 2003 r. \cite{spa} i pierwsze realizacje zaczê³y pojawiaæ siê w podobnym czasie. Wówczas bardzo niszowe, obecnie staj± siê coraz bardziej popularne, g³ównie za spraw± implementacji w przegl±darkach History API i pojawieniu siê wielu frameworków zapewniaj±cych ³atwe tworzenie \textit{single-page application}, takich jak AngularJS, Backbone czy Ember.
 
@@ -235,7 +235,8 @@ Oprócz tego, AngularJS zapewnia:
 \item obs³ugê History API -- zmiana URLa w przegl±darce nie powoduje prze³adowania strony od nowa, tylko modyfikuje istniej±cy dokument HTML (¶ci¶lej, drzewo DOM) tak, ¿eby uzyskaæ po¿±dany widok,
 \item podzia³ logiczny front-endu na kontrolery, szablony i serwisy,
 \item \textit{two-way data binding} - automatyczn± synchronizacjê tre¶ci miêdzy zawarto¶ci± strony (drzewem DOM) a warto¶ciami zmiennych w JavaScripcie,
-\item obiektowe podej¶cie do AJAXowej komunikacji z koñcówkami API dziêki serwisowi \verb+$resource+.
+\item obiektowe podej¶cie do AJAXowej komunikacji z koñcówkami API dziêki serwisowi \verb+$resource+,
+\item internacjonalizacjê tre¶ci strony przy pomocy \verb+ng-l20n+.
 \end{itemize}
 
 Jak widaæ, AngularJS spe³nia wiele zadañ. Na nasze potrzeby wystarcza ca³kowicie je¶li chodzi o kwestie ¿±dañ AJAX i manipulacji drzewem DOM. W naszej aplikacji bardzo czêsto pojawia³a siê jednak potrzeba operowania na strukturach danych z poziomu JavaScriptu. Tutaj znale¼li¶my zastosowanie dla biblioteki Lo-Dash, która zawiera zbiór przydatnych funkcji do manipulacji listami i s³ownikami (np. \verb+foreach+, \verb+map+, \verb+reduce+).
@@ -250,11 +251,96 @@ Dodatkowo, style z Bootstrapa s± responsywne -- zatem nie musieli¶my siê przejmo
 
 
 %TODO Patryk
-\chapter{Zastosowane rozwi±zania}\label{r:rozwiazania}
+\chapter{Wtyczki}\label{r:wtyczki}
+
+
+
+\section{U¿ytkownicy}\label{r:uzytkownicy}
+
+\subsection{Opis}
+Wtyczka U¿ytkownicy jest w zasadzie integraln± czê¶ci± zrêbu eenet, jest ¶ci¶le powi±zana z logowaniem i autoryzacj± u¿ytkowników. Oprócz tego zapewnia system uprawnieñ -- ka¿da inna wtyczka mo¿e zdefiniowaæ we wtyczce U¿ytkownicy jakie uprawnienia s± dostêpne w ramach tej¿e wtyczki. Domy¶lnie ka¿da wtyczka definiuje uprawnienia:
+\begin{itemize}
+\item \verb+admin+ -- u¿ytkownik maj±cy to uprawnienie powinien móc zrobiæ wszystko, co jest dostêpne wewn±trz wtyczki,
+\item \verb+access+ -- u¿ytkownik maj±cy to uprawnienie powinien mieæ dostêp co najmniej do podstawowych funkcjonalno¶ci wtyczki.
+\end{itemize}
+Pozosta³e rodzaje uprawnieñ s± oczywi¶cie definiowane per wtyczka.
+
+
+Kolejn± rzecz± zrealizowan± wewn±trz tej wtyczki s± grupy u¿ytkowników. ¯eby unikn±æ ¿mudnego przydzielania uprawnieñ u¿ytkownik po u¿ytkowniku, mo¿na ich wszystkich dodaæ do pewnej grupy i ustawiæ te uprawnienia grupie. Poza uprawnieniami i list± cz³onków grupa posiada równie¿ listê mened¿erów -- ta funkcjonalno¶æ jest zwi±zana z logik± biznesow± hierarchii pracowników w firmie Laboratorium EE (wiêcej na ten temat w opisie wtyczki Urlopy\ref{r:urlopownik}).
+
+\subsection{Uprawnienia}
+
+Ka¿dy u¿ytkownik wtyczki U¿ytkownicy pozwala na wylistowanie u¿ytkowników eenetu oraz podgl±d ich podstawowych danych i uprawnieñ.
+
+Administrator wtyczki U¿ytkownicy mo¿e dodatkowo modyfikowaæ uprawnienia poszczególnych u¿ytkowników lub grup do poszczególnych wtyczek.
+
+
+
+\section{Powiadomienia}\label{r:powiadomienia}
+Wtyczka Powiadomienia to kolejna integralna wtyczka zrêbu eenet -- ka¿da inna wtyczka mo¿e przy jej pomocy wys³aæ komunikat do u¿ytkownika.
+Wy¶wietlanie wiadomo¶ci odbywa siê podobnie jak w portalach spo³eczno¶ciowych -- w g³ównym menu przy przycisku Powiadomienia pojawia sie liczba nieprzeczytanych wiadomo¶ci. Przej¶cie do g³ównego widoku Powiadomieñ powoduje wylistowanie wiadomo¶ci, przy czym wiadomo¶ci nieprzeczytane s± wyró¿nione w stosunku do przeczytanych.
+
+\subsection{Uprawnienia}
+Zwyk³y u¿ytkownik mo¿e % TODO
+
+
+
+\section{Urlopy}\label{r:urlopy}
+
+
+
+\section{Zasoby}\label{r:zasoby}
+
+
+
+\section{Kafle}\label{r:kafle}
+
+
+
+
+%TODO Patryk
+\chapter{Rozwi±zania implementacyjne}\label{r:rozwiazania}
+
+\section{Rozwi±zanie generyczne}
+
+W wielu przypadkach implementacja funkcjonalno¶ci eenetu sprowadza³a siê do postêpowania zgodnie z zasadami konkretnego frameworka czy biblioteki. Przyk³adowo, gdy chcieli¶my stworzyæ w aplikacji kafle z hiper³±czami na stronie g³ównej, nale¿a³o stworzyæ:
+\begin{itemize}
+\item djangowy model kafla (w \verb+models.py+),
+\item koñcówkê API odpowiedzialn± za pobieranie, tworzenie, aktualizacjê, usuwanie kafla przy pomocy \verb+django-rest-framework+ (pliki \verb+views.py+, \verb+urls.py+, \verb+permissions.py+, \verb+serializers.py+),
+\item pobieranie z API do GUI kafli w odpowiednim angularowym kontrolerze,
+\item wy¶wietlanie kafli w wybranym przez nas angularowym szablonie.
+\end{itemize}
+
+Tego typu rozwi±zanie pojawia³o siê bardzo czêsto w tworzonym przez nas kodzie. Mieli¶my jednak nieraz do czynienia ze skomplikowan± logik± biznesow±, która powodowa³a, ¿e trzeba by³o dane zagadnienie rozwi±zaæ w nieco inny sposób.
+
+\section{System uprawnieñ}
+
+Problemem okaza³o siê stworzenie systemu uprawnieñ, który pasowa³by do logiki aplikacji biznesowej potencjalnie ka¿dej wtyczki dzia³aj±cej w eenecie. Najbardziej rozwiniêtymi wtyczkami, jak± mieli¶my okazjê implementowaæ przy okazji implementowania samego zrêbu eenet by³y Urlopy\ref{r:urlopownik} i Zasoby\ref{r:zasoby}.
+
+Na potrzeby dwuetapowej weryfikacji wniosku urlopowego stworzyli¶my grupy u¿ytkowników. Rozwi±zanie to niestety wystaje poza sam± wtyczkê Urlopy i zachodzi na kompetencje wtyczki U¿ytkownicy, tote¿ musieli¶my zrobiæ grupy tak, aby da³o siê je potencjalnie wykorzystaæ ponownie w kolejnych wtyczkach.
+
+Logika biznesowa wtyczki Zasoby wymaga³a natomiast, ¿eby stworzyæ uprawnienia administracyjne do poszczególnych zasobów. Oprócz tego jest kwestia publiczno¶ci i prywatno¶ci zasobów -- o tym wiêcej w kolejnym dziale.
+
+\section{Metaklasy we wtyczce \textit{Zasoby}}
+
+Wewn±trz wtyczki Zasoby znajduje siê wiele modeli, które maj± ró¿ne pola, ró¿ne formularze edycyjne, ale maj± bardzo podobn± logikê uprawnieñ. Mo¿emy podzieliæ zasoby nastêpuj±co:
+\begin{itemize}
+\item instancja zasobu ma jednego w³a¶ciciela -- przyk³adowo, klucz publiczny SSH mo¿e nale¿eæ do jednej osoby,
+\item instancja zasobu ma wielu w³a¶cicieli -- przyk³adowo, jedna licencja na oprogramowanie mo¿e byæ na wiele stanowisk,
+\item instancja zasobu ma wiele podinstancji -- przyk³adowo, mamy w firmie 20 monitorów 24'' marki Contoso, z których 5 ma Alicja, a 3 ma Bob.
+\end{itemize}
+Oprócz tego nale¿y w modelu zdefiniowaæ czy w³a¶ciciel mo¿e edytowaæ dany zasób (co jest potrzebne w celu unikniêcia znikania kosztownych zasobów z rejestru) oraz czy u¿ytkownicy niebêd±cy w³a¶cicielami mog± dany zasób widzieæ (przydatne we wszelkich has³ach dostêpu, licencjach na oprogramowanie).
+
+¯eby to zrealizowaæ, pos³u¿yli¶my siê metaklasami pythona. Dziêki ich wykorzystaniu definicja modelu zajmuje kilkana¶cie linijek, a poza modelem nale¿y jedynie formularz edycyjny.
+
 
 
 %TODO Patryk
 \chapter{W³o¿ona w projekt praca}\label{r:wlozonapraca}
+
+
+% TODO tutaj co¶ na kszta³t timeline'u kiedy kto co robi³
+% i krotkie podsumowanie ile linii kodu pythona, javascriptu napisano (?)
 
 %TODO Pawe³
 \chapter{Osi±gniêcia}\label{r:osiagniecia}

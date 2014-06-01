@@ -3,4 +3,5 @@
 *.tex.bak
 *.synctex.gz
 *.toc
+*.out
 *.pdf

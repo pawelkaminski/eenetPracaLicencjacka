@@ -152,8 +152,15 @@ K\^un (fooistyczny mêdrzec, XIX w. p.n.e.):
 \item DRY -- \textit{Don`t repeat yourself}, regu³a stosowana podczas wytwarzania oprogramowania, zalecaj±ca unikanie ró¿nego rodzaju powtórzeñ wykonywanych przez programistów -- na przyk³ad unikanie tych samych czynno¶ci podczas kompilowania, unikanie wklejania (lub pisania) tych samych (lub bardzo podobnych) fragmentów kodu w wielu miejscach. W przypadku powtarzaj±cego siê kodu ¼ród³owego mo¿na separowaæ powtarzaj±cy siê fragment i jedynie odwo³ywaæ siê do niego.
 \item API -- \textit{application programming interface}; tutaj: ¶ci¶le okre¶lony zestaw regu³ i ich opisów, w jaki front-end komunikuje siê z back-endem.
 \item REST -- \textit{representational state transfer}, wzorzec architektury oprogramowania standaryzuj±cy regu³y API.
+\item GUI -- \textit{graphical user interface} -- interfejs u¿ytkownika; w przypadku naszej aplikacji ca³a komunikacja na linii aplikacja-u¿ytkownik odbywa siê poprzez przegl±darkê internetow±.
+\item HTML -- \textit{hypertext markup language} -- deklaratywny jêzyk opisu tre¶ci strony.
+\item DOM -- \textit{document object model} -- drzewiasta reprezentacja strony HTML trzymana w pamiêci przegl±darki.
+\item CSS -- \textit{cascading stylesheets} -- deklaratywny jêzyk opisu ostylowania elementów HTML.
+\item responsywno¶æ -- zdolno¶æ strony do aran¿acji uk³adu tre¶ci w zale¿no¶ci od szeroko¶ci okna przegl±darki b±d¼ urz±dzenia, na którym stronê siê przegl±da.
+\item JS -- JavaScript -- jêzyk skryptowy odpowiedzialny za zapytania AJAX i manipulacjê drzewem DOM.
+\item AJAX -- \textit{asynchronous JavaScript and XML} -- technika pozwalaj±ca na wykonywanie asynchronicznych zapytañ HTTP do API.
 \item ma³e i ¶rednie przedsiêbiorstwa -- Przedsiêbiorstwa które zatrudniaj± od 10 do 250 pracowników.
-\item Interface u¿ytkownika -- czê¶æ aplikacji odpowiedzialna za interakcjê z u¿ytkownikiem.
+
 
 \end{itemize}
 
@@ -164,8 +171,10 @@ K\^un (fooistyczny mêdrzec, XIX w. p.n.e.):
 \chapter{Rozwi±zania konkurencyjne}\label{r:konkurencja}
 \section{Bitbucket}
 
+
+
 %TODO Patryk
-\chapter{Zastosowane rozwi±zania}\label{r:rozwiazania}
+\chapter{Zaadaptowane technologie}\label{r:technologie}
 
 \section{Ogólna struktura projektu}
 
@@ -207,9 +216,38 @@ Dostêp do bazy danych, sesje u¿ytkowników i interfejs administracyjny s± zapewni
 Przyjête przez nas rozwi±zania zdecydowanie u³atwi³y pracê z projektem i umo¿liwi³y skupienie siê na logice biznesowej.
 
 
-\section{Front-end}
+\section{Front-end: Javascript}
 
-Koncepcja stron internetowych typu \textit{single-page application} pojawi³a siê w 2003 r. \cite{spa}
+Koncepcja stron internetowych typu \textit{single-page application} pojawi³a siê w 2003 r. \cite{spa} i pierwsze realizacje zaczê³y pojawiaæ siê w podobnym czasie. Wówczas bardzo niszowe, obecnie staj± siê coraz bardziej popularne, g³ównie za spraw± implementacji w przegl±darkach History API i pojawieniu siê wielu frameworków zapewniaj±cych ³atwe tworzenie \textit{single-page application}, takich jak AngularJS, Backbone czy Ember.
+
+Zdecydowali¶my siê na u¿ycie AngularJS g³ównie ze wzglêdu na popularno¶æ, przy okazji jest to projekt za którym stoj± deweloperzy Google'a, wiêc bardzo prawdopodobne, ¿e bêdzie w dalszym ci±gu rozwijany i wspierany.
+
+AngularJS zapewnia nam wzorzec MVW  -- \textit{model-view-whatever}\footnote{\url{https://plus.google.com/110323587230527980117/posts/aZNVhj355G2}}, stanowi±cy po³±czenie popularnych wzorców MVC -- \textit{model-view-controller} i MVVM -- \textit{model-view-viewmodel}.
+
+Oprócz tego, AngularJS zapewnia:
+\begin{itemize}
+\item obs³ugê History API -- zmiana URLa w przegl±darce nie powoduje prze³adowania strony od nowa, tylko modyfikuje istniej±cy dokument HTML (¶ci¶lej, drzewo DOM) tak, ¿eby uzyskaæ po¿±dany widok,
+\item podzia³ logiczny front-endu na kontrolery, szablony i serwisy,
+\item \textit{two-way data binding} - automatyczn± synchronizacjê tre¶ci miêdzy zawarto¶ci± strony (drzewem DOM) a warto¶ciami zmiennych w JavaScripcie,
+\item obiektowe podej¶cie do AJAXowej komunikacji z koñcówkami API dziêki serwisowi \verb+$resource+.
+\end{itemize}
+
+Jak widaæ, AngularJS spe³nia wiele zadañ. Na nasze potrzeby wystarcza ca³kowicie je¶li chodzi o kwestie ¿±dañ AJAX i manipulacji drzewem DOM. W naszej aplikacji bardzo czêsto pojawia³a siê jednak potrzeba operowania na strukturach danych z poziomu JavaScriptu. Tutaj znale¼li¶my zastosowanie dla biblioteki Lo-Dash, która zawiera zbiór przydatnych funkcji do manipulacji listami i s³ownikami (np. \verb+foreach+, \verb+map+, \verb+reduce+).
+
+\section{Front-end: CSS}
+
+Jêzyk HTML ma wbudowane w siebie podstawowe tagi, które spe³niaj± jasno okre¶lon± rolê w interfejsie (np. \verb+button+, \verb+select+), jednak¿e jest du¿a dowolno¶æ w kwestii wizualnego zaplanowania interfejsu. Zamiast wymy¶laæ strukturê stron HTML ca³kowicie od podstaw i pisaæ w³asne style CSS upiêkszaj±ce domy¶lne formatowanie, skorzystali¶my z biblioteki Bootstrap wykonan± przez firmê Twitter. Dziêki niej stworzyli¶my tak± strukturê HTML strony, któr± mo¿na ³atwo modyfikowaæ.
+
+Dodatkowo, style z Bootstrapa s± responsywne -- zatem nie musieli¶my siê przejmowaæ, ¿e trzeba napisaæ osobny kod HTML i osobne style dla u¿ytkowników smartfonów i tabletów.
+
+
+
+
+%TODO Patryk
+\chapter{Zastosowane rozwi±zania}\label{r:rozwiazania}
+
+
+
 
 
 %TODO Patryk

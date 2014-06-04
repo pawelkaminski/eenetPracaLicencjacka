@@ -1,6 +1,7 @@
 *.aux
 *.log
 *.tex.bak
+*.tex.backup
 *.synctex.gz
 *.toc
 *.out

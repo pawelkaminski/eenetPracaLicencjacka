@@ -15,6 +15,7 @@
 
 \usepackage{polski}
 \usepackage{hyperref}
+\usepackage{indentfirst}
 
 %Jesli uzywasz kodowania polskich znakow ISO-8859-2 nastepna linia powinna byc 
 %odkomentowana
@@ -110,15 +111,17 @@ teoria fetorów $\sigma$-$\rho$ otwiera w~tej dziedzinie nowe
 mo¿liwo¶ci.  Wykorzystujemy je w~niniejszej pracy.
 
 Przystêpne wprowadzenie do blabalii fetorycznej mo¿na znale¼æ w~pracy
-Fifaka i~Gryzogrzechotalskiego \cite{ffgg}.  Dlatego w~niniejszym
+Fifaka i~Gryzogrzechotalskiego %\cite{ffgg}.
+Dlatego w~niniejszym
 tek¶cie ograniczymy siê do przypomnienia pojêæ podstawowych.
 
 Praca sk³ada siê z~piêciu rozdzia³ów i~dodatków.
 W~rozdziale~\ref{r:pojecia} przypomniano podstawowe pojêcia blabalii
 fetorycznej.  Dotychczasowe próby implementacji blablizatora
-ró¿nicowego zestawiono w~rozdziale~\ref{r:losers}.
-Rozdzia³~\ref{r:fifak} przedstawia teoriê Fifaka i~wyja¶nia sposób jej
-wykorzystania w~implementacji blabalizatora.  W~rozdziale \ref{r:impl}
+ró¿nicowego zestawiono w~rozdziale~%\ref{r:losers}.
+Rozdzia³~%\ref{r:fifak}
+przedstawia teoriê Fifaka i~wyja¶nia sposób jej
+wykorzystania w~implementacji blabalizatora.  W~rozdziale %\ref{r:impl}
 przedstawiono algorytm blabalizy i~realizuj±cy go program komputerowy.
 Ostatni rozdzia³ zawiera przemy¶lenia dotycz±ce mo¿liwego wp³ywu
 dostêpno¶ci efektywnej blabalizy numerycznej na rozwój blabalii
@@ -196,7 +199,8 @@ Back-end eenetu zosta³ stworzony we frameworku Django. S³u¿y on nastêpuj±cym cel
 \item zawiera w sobie koñcówki API, z którymi komunikuje siê GUI.
 \end{itemize}
 
-Do uruchomienia aplikacji w trybie dewelopersim (przy ustawionym \verb+DEBUG = True+ w ustawieniach projektu) wystarczy sam kod zapewniany przez Django, mianowicie plik \verb+manage.py+ -- Django zajmuje siê wówczas uruchomieniem serwera HTTP obs³uguj±cego zarówno ¿±dania zwi±zane z API, jak i serwowanie plików statycznych.
+Do uruchomienia aplikacji w trybie dewelopersim (przy ustawionym \verb+DEBUG = True+ w ustawieniach projektu) wystarczy sam kod zapewniany przez Django, mianowicie plik
+\verb+manage.py+ -- Django zajmuje siê wówczas uruchomieniem serwera HTTP obs³uguj±cego zarówno ¿±dania zwi±zane z API, jak i serwowanie plików statycznych.
 
 Do instalacji produkcyjnej potrzeba jednak po¶rednicz±cego serwera-bramy, który zajmie siê serwowaniem plików statycznych i przekierowaniem odpowiednich ¿±dañ do Django. Zdecydowali¶my siê na serwer nginx z powodu popularno¶ci takiego po³±czenia Django - nginx. Oczywi¶cie zawsze jest mo¿liwo¶æ zmiany serwera-bramy na np. Apache2 czy lighttpd.
 
@@ -294,11 +298,28 @@ Administrator nie posiada ¿adnych dodatkowych uprawnieñ.
 \section{Urlopy}\label{r:urlopy}
 
 \subsection{Opis}
-Wtyczka Urlopy pozwala na sk³adanie wniosków o przyznanie urlopu oraz zarz±dzanie nimi.
+Wtyczka Urlopy pozwala na sk³adanie wniosków o przyznanie urlopu oraz zarz±dzanie nimi. Z ka¿dy u¿ytkownikiem zwi±zana jest liczba przys³uguj±cych mu wolnych dni(do wykorzystania na urlopy).
 
+W odniesieniu do tej wtyczki administratorem jest osoba z uprawnieniem \verb+admin+ we wtyczce Urlopy, a koordynatorem -- menad¿er grupy(dowolnej), do której nale¿y u¿ytkownik. 
+\\
+
+Przyznawanie urlopów odbywa siê w kilku krokach:
+\begin{enumerate}
+\item U¿ytkownik sk³ada wniosek o urlop.
+\item Wniosek zostaje zaakceptowany, odrzucony, albo odes³any do poprawki przez dowolnego koordynatora.
+\item Je¶li wniosek zosta³ zaakceptowany przez koordynatora, to dowolny administrator mo¿e podj±æ akcje analogicznie jak w punkcie 2.
+\end{enumerate}
+
+Wniosek uznaje siê za zaakceptowany je¶li zostanie zaakceptowany przez administratora. Ponadto z ka¿dym wnioskiem zwi±zana jest liczba dni roboczych w trakcie tego urlopu, która zostaje odjêta od ilo¶ci pozosta³ych dni wolnych danego u¿ytkownika.
+
+Dodatkowo wtyczka Urlopy pozwala na zmianê(przez uprawnione osoby) ilo¶ci dni wolnych, przys³uguj±cych dowolnemu u¿ytkownikowi.
 
 \subsection{Uprawnienia}
+Ka¿dy u¿ytkownik mo¿e przegl±daæ swoje wnioski o urlop oraz edytowaæ te jeszcze nie zaakceptowane. Ponadto mo¿e zmieniaæ  status swoich wniosków na odrzucone.
 
+Koordynator mo¿e akceptowaæ, odrzucaæ lub cofaæ do poprawki wnioski u¿ytkowników grup, których jest menad¿erem.
+
+Administrator mo¿e akceptowaæ, odrzucaæ lub cofaæ do poprawki wniski ju¿ zaakceptowane przez koordynatora. Ponadto mo¿e zmieniaæ liczbê dni wolnych przys³uguj±cych urzytkownikom.
 
 
 
@@ -328,7 +349,7 @@ Tego typu rozwi±zanie pojawia³o siê bardzo czêsto w tworzonym przez nas kodzie. 
 
 \section{System uprawnieñ}
 
-Problemem okaza³o siê stworzenie systemu uprawnieñ, który pasowa³by do logiki aplikacji biznesowej potencjalnie ka¿dej wtyczki dzia³aj±cej w eenecie. Najbardziej rozwiniêtymi wtyczkami, jak± mieli¶my okazjê implementowaæ przy okazji implementowania samego zrêbu eenet by³y Urlopy\ref{r:urlopownik} i Zasoby\ref{r:zasoby}.
+Problemem okaza³o siê stworzenie systemu uprawnieñ, który pasowa³by do logiki aplikacji biznesowej potencjalnie ka¿dej wtyczki dzia³aj±cej w eenecie. Najbardziej rozwiniêtymi wtyczkami, jak± mieli¶my okazjê implementowaæ przy okazji implementowania samego zrêbu eenet by³y Urlopy\ref{r:urlopy} i Zasoby\ref{r:zasoby}.
 
 Na potrzeby dwuetapowej weryfikacji wniosku urlopowego stworzyli¶my grupy u¿ytkowników. Rozwi±zanie to niestety wystaje poza sam± wtyczkê Urlopy i zachodzi na kompetencje wtyczki U¿ytkownicy, tote¿ musieli¶my zrobiæ grupy tak, aby da³o siê je potencjalnie wykorzystaæ ponownie w kolejnych wtyczkach.
 
@@ -340,12 +361,17 @@ Wewn±trz wtyczki Zasoby znajduje siê wiele modeli, które maj± ró¿ne pola, ró¿ne 
 \begin{itemize}
 \item instancja zasobu ma jednego w³a¶ciciela -- przyk³adowo, klucz publiczny SSH mo¿e nale¿eæ do jednej osoby,
 \item instancja zasobu ma wielu w³a¶cicieli -- przyk³adowo, jedna licencja na oprogramowanie mo¿e byæ na wiele stanowisk,
-\item instancja zasobu ma wiele podinstancji -- przyk³adowo, mamy w firmie 20 monitorów 24'' marki Contoso, z których 5 ma Alicja, a 3 ma Bob.
+\item instancja zasobu ma wiele podinstancji -- przyk³adowo, mamy w firmie 20 monitorów 24'' marki Contoso, z których 5 ma Alicja, a 3 ma Bartek.
 \end{itemize}
+
 Oprócz tego nale¿y w modelu zdefiniowaæ czy w³a¶ciciel mo¿e edytowaæ dany zasób (co jest potrzebne w celu unikniêcia znikania kosztownych zasobów z rejestru) oraz czy u¿ytkownicy niebêd±cy w³a¶cicielami mog± dany zasób widzieæ (przydatne we wszelkich has³ach dostêpu, licencjach na oprogramowanie).
 
-¯eby to zrealizowaæ, pos³u¿yli¶my siê metaklasami pythona. Dziêki ich wykorzystaniu definicja modelu zajmuje kilkana¶cie linijek, a poza modelem nale¿y jedynie formularz edycyjny.
+W celu realizacji tego, pos³u¿yli¶my siê metaklasami pythona. Dziêki ich wykorzystaniu definicja modelu zajmuje kilkana¶cie linijek, a poza modelem nale¿y jedynie stworzyæ formularz edycyjny.
 
+\section{Wersjonowanie}
+W celu zapamiêtania historii zmian w bazie danych zosta³o zaimplementowane wersjonowanie. Zosta³ do tego wykorzystany dodatego do Django o nazwie \verb+django-reversion+. Zapamiêtuje on wszystkie dokonane zmiany instancji djangowych modeli(np. u¿ytkownika, zasobu, wniosku o urlop) oraz pozwala na ³atwe przywracanie poprzednich wersji.
+
+Dziêki u¿yciu wersjonowania administratorzy posiadaj± kompletn± historiê zmian, co rozwi±zuje problem niechcianych zmian(np. pomy³ek) w aplikacji eenet.
 
 
 %TODO Patryk
@@ -359,16 +385,17 @@ Oprócz tego nale¿y w modelu zdefiniowaæ czy w³a¶ciciel mo¿e edytowaæ dany zasób 
 \chapter{Osi±gniêcia}\label{r:osiagniecia}
 \section{Produkt}
 Aplikacja eenet znajduje siê pod adresem https://eenet.laboratorium.ee.
-Wtyczki zawarte w niej zgodnie z za³o¿eniem zamawiaj±cego s± u¿ywane przez pracowników firmy Laboratorium EE. ¦wiadczy o ponad 50 zarejestrowanych u¿ytkowników oraz du¿a liczba zg³oszonych przez nich b³êdów wewn±trz aplikacji. Problemy zg³aszane przez u¿ytkowników mia³y ró¿norakie pod³o¿e, poczynaj±c od b³êdów w t³umaczeniach, przechodz±c przez uwagi dotycz±cye zmian w interfacu u¿ytkownika, a koñcz±c na pro¶bach o dodanie nowej logiki w aplikacji. Ponadto planowane jest dalsze rozwijanie aplikacji przez przysz³ych praktykantów w Laboratorium EE. Co wiêcej eenet bêdzie sprzedawany w pakiecie wraz z innymi produktami firmy przeznaczonymi dla ma³ych i ¶rednich przedsiêbiorstw. 
+Wtyczki zawarte w niej zgodnie z za³o¿eniem zamawiaj±cego s± u¿ywane przez pracowników firmy Laboratorium EE. O sukcesie ¶wiadczy ponad 50 zarejestrowanych u¿ytkowników oraz du¿a liczba zg³oszonych przez nich uwag odno¶nie aplikacji. Uwagi zg³aszane przez u¿ytkowników mia³y ró¿norakie pod³o¿e, poczynaj±c od b³êdów w t³umaczeniach, przechodz±c przez uwagi dotycz±cye zmian w interfejsie u¿ytkownika, a koñcz±c na pro¶bach o dodanie nowej logiki w aplikacji. Ponadto planowane jest dalsze rozwijanie aplikacji przez przysz³ych praktykantów w Laboratorium EE. Co wiêcej, planowana jest sprzeda¿ eenetu w pakiecie wraz z innymi produktami firmy przeznaczonymi dla ma³ych i ¶rednich przedsiêbiorstw. 
 
 \section{Tworzenie produktu}
 Sposób w jaki powsta³a aplikacja, czas jej wykonania oraz jako¶æ wykonania zadowoli³ klienta na tyle, ¿e wszystkim cz³onkom zespo³u zosta³a zaproponowana dalsza wspó³praca, w nowych projektach.
 
 
 %TODO niby all ale i tak bedzie musiala napisac to jedna osoba - nie robert
+%FIXME do wywalenia bo pokrywa sie z oraca wlozana w projekt(chyba zeby tam wypisac co zostalo zrobione a tu kto co konkretnie zrobil, do uzgodnienia)
 \chapter{Wykonana praca przez poszczególne osoby w projekcie}\label{r:ktopraca}
 
-%TODO niby all ale i tak bedzie musiala napisac to jedna osoba - nie robert
+%TODO niby all ale i tak bedzie musiala napisac to jedna osoba - nie robert; moge to zrobic(borys) jak ktos mi powie co tu ma sie znalezc, bo nie wiem
 \chapter{Zawarto¶æ kodu dostarczonego wraz z prac±}\label{r:kod}
 
 

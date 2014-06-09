@@ -15,6 +15,7 @@
 
 \usepackage{polski}
 \usepackage{hyperref}
+\usepackage{indentfirst}
 
 %Jesli uzywasz kodowania polskich znakow ISO-8859-2 nastepna linia powinna byc 
 %odkomentowana
@@ -110,15 +111,17 @@ teoria fetorów $\sigma$-$\rho$ otwiera w~tej dziedzinie nowe
 mo¿liwo¶ci.  Wykorzystujemy je w~niniejszej pracy.
 
 Przystêpne wprowadzenie do blabalii fetorycznej mo¿na znale¼æ w~pracy
-Fifaka i~Gryzogrzechotalskiego \cite{ffgg}.  Dlatego w~niniejszym
+Fifaka i~Gryzogrzechotalskiego %\cite{ffgg}.
+Dlatego w~niniejszym
 tek¶cie ograniczymy siê do przypomnienia pojêæ podstawowych.
 
 Praca sk³ada siê z~piêciu rozdzia³ów i~dodatków.
 W~rozdziale~\ref{r:pojecia} przypomniano podstawowe pojêcia blabalii
 fetorycznej.  Dotychczasowe próby implementacji blablizatora
-ró¿nicowego zestawiono w~rozdziale~\ref{r:losers}.
-Rozdzia³~\ref{r:fifak} przedstawia teoriê Fifaka i~wyja¶nia sposób jej
-wykorzystania w~implementacji blabalizatora.  W~rozdziale \ref{r:impl}
+ró¿nicowego zestawiono w~rozdziale~%\ref{r:losers}.
+Rozdzia³~%\ref{r:fifak}
+przedstawia teoriê Fifaka i~wyja¶nia sposób jej
+wykorzystania w~implementacji blabalizatora.  W~rozdziale %\ref{r:impl}
 przedstawiono algorytm blabalizy i~realizuj±cy go program komputerowy.
 Ostatni rozdzia³ zawiera przemy¶lenia dotycz±ce mo¿liwego wp³ywu
 dostêpno¶ci efektywnej blabalizy numerycznej na rozwój blabalii
@@ -135,33 +138,34 @@ K\^un (fooistyczny mêdrzec, XIX w. p.n.e.):
 \section{Definicje}
 
 \begin{itemize}
-\item Framework -- bezpo¶rednio t³umaczony jako zr±b, jest to szkielet do budowy aplikacji
-\item Eenet -- nazwa w³asna opisywanego zrêbu.
-\item Laboratorium EE -- firma, zg³aszaj±ca zapotrzebowanie na eenet.
-\item Wtyczka -- aplikacja korzystaj±ca z udogodnieñ ¶rodowiska zapewnianego przez eenet.
-\item Wtyczki przyk³adowe -- wtyczki, których stworzenie jest przewidziane w ramach wykonania aplikacji eenet.
-\item Przegl±darka internetowa - program instalowany na urz±dzeniu u¿ytkownika umo¿liwiaj±ca wy¶wietlanie stron WWW dostarczanych przez serwer.
-\item Serwer produkcyjny -- komputer serwuj±cy stronê WWW, posiada bazê danych aplikacji.
-\item Serwer developerski(testowy) -- maszyna, która s³u¿y do testowania ka¿dej wersji aplikacji zanim ta trafi na serwer produkcyjny.
-\item Kopia bezpieczeñstwa -- informacje, które maj± s³u¿yæ do odtworzenia oryginalnych danych, znajduj±cych siê na serwerze produkcyjnym, w przypadku ich utraty lub uszkodzenia.
-\item \texttit{Front-end} -- czê¶æ kodu zapewniaj±ca graficzny i testowy interfejs, jest interpretowana przez przegl±darkê, tzn. dzia³a po stronie u¿ytkownika.
-\item \texttit{Back-end} -- czê¶æ kodu dzia³aj±ca po stronie serwera, odpowiada za logikê operacji na danych.
-\item Aplikacja internetowa -- aplikacja w formie strony WWW, posiada front-end i back-end.
-\item \textit{Single-page application} -- podczas u¿ytkowania aplikacji tego typu nigdy nie zostaje prze³adowana strona, dane pomiêdzy klientem a serwerem s± przesy³ane przy pomocy zapytañ asynchronicznych.
-\item UX (ang. \textit{User experience}) -- do¶wiadczenia wizualne u¿ytkownika aplikacji internetowej, pozwalaj± okre¶liæ ³atwo¶æ, z jak± korzysta siê z aplikacji.
-\item DRY (ang. \textit{Don`t Repeat Yourself}) -- regu³a stosowana podczas wytwarzania oprogramowania, zalecaj±ca unikanie ró¿nego rodzaju powtórzeñ wykonywanych przez programistów -- na przyk³ad unikanie tych samych czynno¶ci podczas kompilowania, unikanie wklejania (lub pisania) tych samych (lub bardzo podobnych) fragmentów kodu w wielu miejscach. W przypadku powtarzaj±cego siê kodu ¼ród³owego mo¿na separowaæ powtarzaj±cy siê fragment i jedynie odwo³ywaæ siê do niego.
-\item API (ang. \textit{Application Programming Interface}) -- ¶ci¶le okre¶lony zestaw regu³ i ich opisów, specyfikuj±cych sposób w jaki front-end komunikuje siê z back-endem.
-\item REST (ang. \textit{Representational state transfer}) -- wzorzec architektury oprogramowania standaryzuj±cy regu³y API.
-\item GUI (ang. \textit{Graphical User Interface}) -- interfejs u¿ytkownika; w przypadku naszej aplikacji ca³a komunikacja na linii aplikacja-u¿ytkownik odbywa siê poprzez przegl±darkê internetow±.
-\item HTML (ang. \textit{HyperText Markup Language}) -- deklaratywny jêzyk opisu tre¶ci strony.
-\item DOM (ang. \textit{Document Object Model}) -- drzewiasta reprezentacja strony HTML trzymana w pamiêci przegl±darki.
-\item CSS (ang. \textit{Cascading Style Sheets}) -- deklaratywny jêzyk opisu ostylowania elementów HTML.
-\item Responsywno¶æ -- zdolno¶æ strony do aran¿acji uk³adu tre¶ci w zale¿no¶ci od szeroko¶ci okna przegl±darki b±d¼ urz±dzenia, na którym stronê siê przegl±da.
-\item JS (ang. \textit{JavaScript}) -- jêzyk skryptowy odpowiedzialny za zapytania AJAX i manipulacjê drzewem DOM.
-\item AJAX (ang. \textit{Asynchronous JavaScript and XML}) -- technika pozwalaj±ca na wykonywanie asynchronicznych zapytañ HTTP do API.
-\item Ma³e i ¶rednie przedsiêbiorstwa -- firmy zatrudniaj±ce od 10 do 250 pracowników.
-\item UI (ang. \textit{User Interface}) -- interfejs u¿ytkownika -- czê¶æ aplikacji odpowiedzialna za interakcjê z odbiorc± koñcowym.
-\item \textit{Open source} -- otwarte oprogramowanie -- oprogramowanie, którego licencja pozwala na legalne i nieodp³atne kopiowane, zarówno kodu wynikowego jak i ¼ród³owego oraz na dowolne modyfikacje kodu ¼ród³owego.
+\item framework -- bezpo¶rednio t³umaczony jako zr±b, jest to szkielet do budowy aplikacji;
+\item eenet -- nazwa w³asna opisywanego zrêbu;
+\item Laboratorium EE -- firma zg³aszaj±ca zapotrzebowanie na eenet;
+\item wtyczka -- aplikacja korzystaj±ca z udogodnieñ ¶rodowiska zapewnianego przez eenet;
+\item wtyczki przyk³adowe -- wtyczki, których stworzenie jest przewidziane w ramach wykonania aplikacji eenet;
+\item przegl±darka internetowa - program instalowany na urz±dzeniu u¿ytkownika, umo¿liwiaj±cy wy¶wietlanie stron WWW dostarczanych przez serwer;
+\item serwer produkcyjny -- komputer serwuj±cy stronê WWW, posiada bazê danych aplikacji;
+\item serwer developerski(testowy) -- maszyna, która s³u¿y do testowania ka¿dej wersji aplikacji, zanim ta trafi na serwer produkcyjny;
+\item kopia bezpieczeñstwa -- informacje, które maj± s³u¿yæ do odtworzenia oryginalnych danych znajduj±cych siê na serwerze produkcyjnym, w przypadku ich utraty lub uszkodzenia;
+\item front-end -- czê¶æ kodu zapewniaj±ca graficzny i testowy interfejs, jest interpretowana przez przegl±darkê tzn. dzia³a po stronie u¿ytkownika;
+\item back-end -- czê¶æ kodu dzia³aj±ca po stronie serwera, odpowiada za logikê operacji na danych;
+\item aplikacja internetowa -- aplikacja w formie strony WWW, posiada front-end i back-end;
+\item \textit{single-page application} -- podczas u¿ytkowania aplikacji tego typu nigdy nie zostaje prze³adowana strona, dane pomiêdzy klientem a serwerem s± przesy³ane przy pomocy zapytañ asynchronicznych;
+\item UX (ang. \textit{User Experience}) -- do¶wiadczenia wizualne u¿ytkownika aplikacji internetowej, pozwalaj± okre¶liæ ³atwo¶æ, z jak± korzysta siê z aplikacji;
+\item DRY (ang. \textit{Don`t Repeat Yourself}) -- regu³a stosowana podczas wytwarzania oprogramowania, zalecaj±ca unikanie ró¿nego rodzaju powtórzeñ wykonywanych przez programistów -- na przyk³ad unikanie tych samych czynno¶ci podczas kompilowania, unikanie wklejania (lub pisania) tych samych (lub bardzo podobnych) fragmentów kodu w wielu miejscach. W przypadku powtarzaj±cego siê kodu ¼ród³owego mo¿na separowaæ powtarzaj±cy siê fragment i jedynie odwo³ywaæ siê do niego;
+\item API (ang. \textit{Application Programming Interface}) -- ¶ci¶le okre¶lony zestaw regu³ i ich opisów, specyfikuj±cych sposób w jaki front-end komunikuje siê z back-endem;
+\item REST (ang. \textit{REpresentational State Transfer}) -- wzorzec architektury oprogramowania standaryzuj±cy regu³y API;
+\item GUI (ang. \textit{Graphical User Interface}) -- interfejs u¿ytkownika, w przypadku aplikacji eenet ca³a komunikacja na linii aplikacja-u¿ytkownik odbywa siê poprzez przegl±darkê internetow±;
+\item HTML (ang. \textit{HyperText Markup Language}) -- deklaratywny jêzyk opisu tre¶ci strony;
+\item DOM (ang. \textit{Document Object Model}) -- drzewiasta reprezentacja strony HTML, trzymana w pamiêci przegl±darki;
+\item CSS (ang. \textit{Cascading Style Sheets}) -- deklaratywny jêzyk opisu stylowania elementów HTML;
+\item responsywno¶æ -- zdolno¶æ strony do aran¿acji uk³adu tre¶ci w zale¿no¶ci od szeroko¶ci okna przegl±darki b±d¼ urz±dzenia, na którym stronê siê przegl±da;
+\item JS (ang. \textit{JavaScript}) -- jêzyk skryptowy odpowiedzialny za zapytania AJAX i manipulacjê drzewem DOM;
+\item AJAX (ang. \textit{Asynchronous JavaScript and XML}) -- technika pozwalaj±ca na wykonywanie asynchronicznych zapytañ HTTP do API;
+\item ma³e i ¶rednie przedsiêbiorstwa -- firmy zatrudniaj±ce od 10 do 250 pracowników;
+\item UI (ang. \textit{User Interface}) -- interfejs u¿ytkownika -- czê¶æ aplikacji odpowiedzialna za interakcjê z odbiorc± koñcowym;
+\item \textit{open source} -- otwarte oprogramowanie -- oprogramowanie, którego licencja pozwala na legalne i nieodp³atne kopiowane zarówno kodu wynikowego jak i ¼ród³owego oraz na dowolne modyfikacje kodu ¼ród³owego;
+\item OAuth -- otwarty standard autoryzuj±cy, pozwalaj±cy u¿ytkownikom dzieliæ swoje zasoby(np. dane, kontakty, zdjêcia) przechowywane na jednej stronie z inn± stron±. Dziêki temu mo¿na u¿ywaæ jednego konta(np. Google, Facebook, Twitter itp.) do logwania siê w wielu miejscach.
 
 
 \end{itemize}
@@ -174,9 +178,9 @@ K\^un (fooistyczny mêdrzec, XIX w. p.n.e.):
 \section{Atlassian}
 Firma Atlassian dostarcza szeroki wachlarz aplikacji do zarz±dzania prac±. Ka¿da z funkcjonalno¶ci jest oddzieln± aplikacj±. Jest to zdecydowanie najlepiej wykonane narzêdzie na rynku jednak¿e cena ka¿dej z funkcjonalno¶ci jest bardzo wysoka i zwykle tylko du¿e przedsiêbiorstwa staæ na wykup potrzebnych licencji.
 \section{AppFlower}
-Open sourcowy framework do tworzenia ma³ych aplikacji, nie wymagaj±cy programowania, pozwalaj±cy na budowanie aplikacji z klocków. Plusem tego rozwi±zania jest to ¿e jest darmowy, natomiast minusem fakt, ¿e po przez ³atwo¶æ tworzenia aplikacji jest zarazem zbyt ograniczony jak na wiêksze potrzeby ma³ych i ¶rednich przedsiêbiorstw.
+Open sourcowy framework do tworzenia ma³ych aplikacji, nie wymagaj±cy programowania, pozwalaj±cy na budowanie aplikacji z klocków. Plusem tego rozwi±zania jest to ¿e jest darmowy, natomiast minusem fakt, ¿e ³atwo¶æ tworzenia aplikacji powoduje zbyt ograniczon± funkcjonalno¶æ, jak na wiêksze potrzeby ma³ych i ¶rednich przedsiêbiorstw.
 \section{OpenBiz AppBuilder}
-P³atny framework do tworzenia ma³ych aplikacji i pozwalaj±cy na handlowanie nimi. Mocn± stron± tego rozwi±zania jest do¶æ du¿a dowolno¶æ w tworzeniu nowych aplikacji. S³absz± stron± tej aplikazji jest jej do¶æ wysoka cena oraz brak dobrej dokumentacji do ¶rodowiska tworzenia nowych wtyczek.
+P³atny framework do tworzenia ma³ych aplikacji, pozwalaj±cy na handlowanie nimi. Mocn± stron± tego rozwi±zania jest do¶æ du¿a dowolno¶æ w tworzeniu nowych aplikacji, natomiast s³absz± -- jej do¶æ wysoka cena oraz brak dobrej dokumentacji do ¶rodowiska tworzenia nowych wtyczek.
 
 
 %TODO Patryk
@@ -184,24 +188,25 @@ P³atny framework do tworzenia ma³ych aplikacji i pozwalaj±cy na handlowanie nimi
 
 \section{Ogólna struktura projektu}
 
-Zdecydowali¶my siê na realizacjê aplikacji internetowej jako interaktywnej strony WWW, co jest naturalnym wyborem patrz±c na to ile narzêdzi obecnie jest dostêpnych w taki sposób. Dodatkowo, za³o¿yli¶my, ¿e nasza strona powinna spe³niaæ wzorzec \textit{single-page application}, który wymusza ¶cis³y podzia³ projektu na API i GUI.
+Zdecydowali¶my siê na realizacjê aplikacji internetowej jako interaktywnej strony WWW, co jest naturalnym wyborem zwa¿ywszy na to ile narzêdzi obecnie jest dostêpnych w ten sposób. Dodatkowo za³o¿yli¶my, ¿e nasza strona powinna spe³niaæ wzorzec \textit{single-page application}, który wymusza ¶cis³y podzia³ projektu na API i GUI.
 
 \section{Back-end: instalacja projektu}
 
-Back-end eenetu zosta³ stworzony w zrêbie Django. S³u¿y on nastêpuj±cym celom:
+Back-end eenetu zosta³ stworzony we frameworku Django. S³u¿y on nastêpuj±cym celom:
 \begin{itemize}
 \item zapewnia mechanizm sesji zalogowanego u¿ytkownika,
 \item po¶redniczy w logowaniu i autoryzacji OAuth,
 \item zawiera w sobie koñcówki API, z którymi komunikuje siê GUI.
 \end{itemize}
 
-Do uruchomienia aplikacji w trybie dewelopersim (przy ustawionym \verb+DEBUG = True+ w ustawieniach projektu) wystarczy sam kod zapewniany przez Django, mianowicie plik \verb+manage.py+ -- Django zajmuje siê wówczas uruchomieniem serwera HTTP obs³uguj±cego zarówno ¿±dania zwi±zane z API, jak i serwowanie plików statycznych.
+Do uruchomienia aplikacji w trybie dewelopersim (przy ustawionym \verb+DEBUG = True+ w ustawieniach projektu) wystarczy sam kod zapewniany przez Django, mianowicie plik
+\verb+manage.py+ -- Django zajmuje siê wówczas uruchomieniem serwera HTTP obs³uguj±cego zarówno ¿±dania zwi±zane z API, jak i serwowanie plików statycznych.
 
-Do instalacji produkcyjnej potrzeba jednak po¶rednicz±cego serwera-bramy, który zajmie siê serwowaniem plików statycznych i przekierowaniem odpowiednich ¿±dañ do Django. Zdecydowali¶my siê na serwer nginx z powodu popularno¶ci takiego po³±czenia Django-nginx. Oczywi¶cie zawsze jest mo¿liwo¶æ zmiany serwera-bramy na np. Apache2 czy lighttpd.
+Do instalacji produkcyjnej potrzeba jednak po¶rednicz±cego serwera-bramy, który zajmie siê serwowaniem plików statycznych i przekierowaniem odpowiednich ¿±dañ do Django. Zdecydowali¶my siê na serwer nginx z powodu popularno¶ci takiego po³±czenia Django - nginx. Oczywi¶cie zawsze jest mo¿liwo¶æ zmiany serwera-bramy na np. Apache2 czy lighttpd.
 
 Oprócz ustalenia serwera-bramy, nale¿y te¿ w jaki¶ sposób uruchomiæ serwer Django na produkcji. W tym celu u¿yli¶my narzêdzia supervisord, które powoduje, ¿e nie trzeba pisaæ osobnego daemona do procesu Django.
 
-eenet zosta³ przygotowany równie¿ na obs³ugê zadañ asynchronicznych -- czyli takich, które mo¿na zrobiæ osobnym procesem, nie spowalniaj±c renderowania odpowiedzi serwera. Przyk³adem tego mo¿e byæ pobieranie zdjêcia u¿ytkownika -- poniewa¿ autoryzacja u¿ytkowników odbywa siê przy pomocy Google OAuth, aplikacja eenet mo¿e wys³aæ ¿±danie do Google+ API o takowe zdjêcie. W celu wykonania tej funkcjonalno¶ci ponownie zwrócili¶my siê do rozwi±zañ popularnych -- wykorzystali¶my Celery, asynchroniczn± kolejkê zadañ w po³±czeniu z brokerem zadañ Rabbitmq.
+Eenet zosta³ przygotowany równie¿ na obs³ugê zadañ asynchronicznych -- czyli takich, które mo¿na zrobiæ osobnym procesem, nie spowalniaj±c renderowania odpowiedzi serwera. Przyk³adem tego mo¿e byæ pobieranie zdjêcia u¿ytkownika -- poniewa¿ autoryzacja u¿ytkowników odbywa siê przy pomocy Google OAuth, aplikacja eenet mo¿e wys³aæ ¿±danie do Google+ API o takowe zdjêcie. W celu wykonania tej funkcjonalno¶ci ponownie zwrócili¶my siê do rozwi±zañ popularnych -- wykorzystali¶my Celery, asynchroniczn± kolejkê zadañ w po³±czeniu z brokerem zadañ Rabbitmq.
 
 Z uwagi na to, ¿e postawienie pe³nego produkcyjnego serwera posiada wiele zale¿no¶ci, sporz±dzili¶my instrukcjê, która prowadzi administratora aplikacji krok po kroku, zaczynaj±c od stawiania instalacji deweloperskiej, poprzez produkcyjn±, a¿ po uruchamianie zadañ asynchronicznych. Znajduje siê ona w pliku \verb+README.md+.
 
@@ -232,18 +237,18 @@ AngularJS zapewnia nam wzorzec MVW  -- \textit{model-view-whatever}\footnote{\ur
 
 Oprócz tego, AngularJS zapewnia:
 \begin{itemize}
-\item obs³ugê History API -- zmiana URLa w przegl±darce nie powoduje prze³adowania strony od nowa, tylko modyfikuje istniej±cy dokument HTML (¶ci¶lej, drzewo DOM) tak, ¿eby uzyskaæ po¿±dany widok,
+\item obs³ugê History API -- zmiana URLa przez JavaScript nie powoduje prze³adowania strony od nowa, tylko modyfikuje istniej±cy dokument HTML (¶ci¶lej drzewo DOM) tak, ¿eby uzyskaæ po¿±dany widok,
 \item podzia³ logiczny front-endu na kontrolery, szablony i serwisy,
-\item \textit{two-way data binding} - automatyczn± synchronizacjê tre¶ci miêdzy zawarto¶ci± strony (drzewem DOM) a warto¶ciami zmiennych w JavaScripcie,
+\item \textit{two-way data binding} - automatyczn± synchronizacjê tre¶ci miêdzy zawarto¶ci± strony (drzewem DOM), a warto¶ciami zmiennych w JavaScripcie,
 \item obiektowe podej¶cie do AJAXowej komunikacji z koñcówkami API dziêki serwisowi \verb+$resource+,
 \item internacjonalizacjê tre¶ci strony przy pomocy \verb+ng-l20n+.
 \end{itemize}
 
-Jak widaæ, AngularJS spe³nia wiele zadañ. Na nasze potrzeby wystarcza ca³kowicie je¶li chodzi o kwestie ¿±dañ AJAX i manipulacji drzewem DOM. W naszej aplikacji bardzo czêsto pojawia³a siê jednak potrzeba operowania na strukturach danych z poziomu JavaScriptu. Tutaj znale¼li¶my zastosowanie dla biblioteki Lo-Dash, która zawiera zbiór przydatnych funkcji do manipulacji listami i s³ownikami (np. \verb+foreach+, \verb+map+, \verb+reduce+).
+Jak widaæ AngularJS spe³nia wiele zadañ. Na potrzeby eenetu wystarcza ca³kowicie, je¶li chodzi o kwestie ¿±dañ AJAX i manipulacji drzewem DOM. W aplikacji eenet bardzo czêsto pojawia³a siê jednak potrzeba operowania na strukturach danych z poziomu JavaScriptu. Tutaj znale¼li¶my zastosowanie dla biblioteki Lo-Dash, która zawiera zbiór przydatnych funkcji do manipulacji listami i s³ownikami (np. \verb+foreach+, \verb+map+, \verb+reduce+).
 
 \section{Front-end: CSS}
 
-Jêzyk HTML ma wbudowane w siebie podstawowe tagi, które spe³niaj± jasno okre¶lon± rolê w interfejsie (np. \verb+button+, \verb+select+), jednak¿e jest du¿a dowolno¶æ w kwestii wizualnego zaplanowania interfejsu. Zamiast wymy¶laæ strukturê stron HTML ca³kowicie od podstaw i pisaæ w³asne style CSS upiêkszaj±ce domy¶lne formatowanie, skorzystali¶my z biblioteki Bootstrap wykonan± przez firmê Twitter. Dziêki niej stworzyli¶my tak± strukturê HTML strony, któr± mo¿na ³atwo modyfikowaæ.
+Jêzyk HTML ma wbudowane podstawowe tagi, które spe³niaj± jasno okre¶lon± rolê w interfejsie (np. \verb+button+, \verb+select+), jednak¿e jest du¿a dowolno¶æ w kwestii wizualnego zaplanowania interfejsu. Zamiast wymy¶laæ strukturê stron HTML ca³kowicie od podstaw i pisaæ w³asne style CSS upiêkszaj±ce domy¶lne formatowanie, skorzystali¶my z biblioteki Bootstrap wykonanej przez firmê Twitter. Dziêki niej stworzyli¶my tak± strukturê HTML strony, któr± mo¿na ³atwo modyfikowaæ.
 
 Dodatkowo, style z Bootstrapa s± responsywne -- zatem nie musieli¶my siê przejmowaæ, ¿e trzeba napisaæ osobny kod HTML i osobne style dla u¿ytkowników smartfonów i tabletów.
 
@@ -258,34 +263,63 @@ Dodatkowo, style z Bootstrapa s± responsywne -- zatem nie musieli¶my siê przejmo
 \section{U¿ytkownicy}\label{r:uzytkownicy}
 
 \subsection{Opis}
-Wtyczka U¿ytkownicy jest w zasadzie integraln± czê¶ci± zrêbu eenet, jest ¶ci¶le powi±zana z logowaniem i autoryzacj± u¿ytkowników. Oprócz tego zapewnia system uprawnieñ -- ka¿da inna wtyczka mo¿e zdefiniowaæ we wtyczce U¿ytkownicy jakie uprawnienia s± dostêpne w ramach tej¿e wtyczki. Domy¶lnie ka¿da wtyczka definiuje uprawnienia:
+Wtyczka U¿ytkownicy jest w zasadzie integraln± czê¶ci± frameworku eenet, jest ¶ci¶le powi±zana z logowaniem i autoryzacj± u¿ytkowników. Oprócz tego zapewnia system uprawnieñ -- ka¿da inna wtyczka mo¿e zdefiniowaæ we wtyczce U¿ytkownicy jakie uprawnienia s± dostêpne w ramach tej¿e wtyczki. Domy¶lnie ka¿da wtyczka definiuje uprawnienia:
 \begin{itemize}
 \item \verb+admin+ -- u¿ytkownik maj±cy to uprawnienie powinien móc zrobiæ wszystko, co jest dostêpne wewn±trz wtyczki,
 \item \verb+access+ -- u¿ytkownik maj±cy to uprawnienie powinien mieæ dostêp co najmniej do podstawowych funkcjonalno¶ci wtyczki.
 \end{itemize}
-Pozosta³e rodzaje uprawnieñ s± oczywi¶cie definiowane per wtyczka.
+Pozosta³e rodzaje uprawnieñ s± oczywi¶cie definiowane dla konkretnej wtyczki.
 
 
-Kolejn± rzecz± zrealizowan± wewn±trz tej wtyczki s± grupy u¿ytkowników. ¯eby unikn±æ ¿mudnego przydzielania uprawnieñ u¿ytkownik po u¿ytkowniku, mo¿na ich wszystkich dodaæ do pewnej grupy i ustawiæ te uprawnienia grupie. Poza uprawnieniami i list± cz³onków grupa posiada równie¿ listê mened¿erów -- ta funkcjonalno¶æ jest zwi±zana z logik± biznesow± hierarchii pracowników w firmie Laboratorium EE (wiêcej na ten temat w opisie wtyczki Urlopy\ref{r:urlopownik}).
+Kolejn± rzecz± zrealizowan± wewn±trz tej wtyczki s± grupy u¿ytkowników. ¯eby unikn±æ ¿mudnego przydzielania uprawnieñ u¿ytkownik po u¿ytkowniku, mo¿na ich wszystkich dodaæ do pewnej grupy i ustawiæ te uprawnienia grupie. Poza uprawnieniami i list± cz³onków grupa posiada równie¿ listê mened¿erów -- ta funkcjonalno¶æ jest zwi±zana z logik± biznesow± hierarchii pracowników w firmie Laboratorium EE (wiêcej na ten temat w opisie wtyczki Urlopy\ref{r:urlopy}).
 
 \subsection{Uprawnienia}
 
-Ka¿dy u¿ytkownik wtyczki U¿ytkownicy pozwala na wylistowanie u¿ytkowników eenetu oraz podgl±d ich podstawowych danych i uprawnieñ.
+Ka¿dy u¿ytkownik wtyczki U¿ytkownicy ma dostêp do listy u¿ytkowników eenetu oraz podgl±d ich podstawowych danych i uprawnieñ.
 
 Administrator wtyczki U¿ytkownicy mo¿e dodatkowo modyfikowaæ uprawnienia poszczególnych u¿ytkowników lub grup do poszczególnych wtyczek.
 
 
 
 \section{Powiadomienia}\label{r:powiadomienia}
+
+\subsection{Opis}
+
 Wtyczka Powiadomienia to kolejna integralna wtyczka zrêbu eenet -- ka¿da inna wtyczka mo¿e przy jej pomocy wys³aæ komunikat do u¿ytkownika.
+
 Wy¶wietlanie wiadomo¶ci odbywa siê podobnie jak w portalach spo³eczno¶ciowych -- w g³ównym menu przy przycisku Powiadomienia pojawia sie liczba nieprzeczytanych wiadomo¶ci. Przej¶cie do g³ównego widoku Powiadomieñ powoduje wylistowanie wiadomo¶ci, przy czym wiadomo¶ci nieprzeczytane s± wyró¿nione w stosunku do przeczytanych.
 
 \subsection{Uprawnienia}
-Zwyk³y u¿ytkownik mo¿e % TODO
+Ka¿dy u¿ytkownik mo¿e przegl±daæ otrzymane powiadomienia oraz je usuwaæ.
+Administrator nie posiada ¿adnych dodatkowych uprawnieñ.
 
 
 
 \section{Urlopy}\label{r:urlopy}
+
+\subsection{Opis}
+Wtyczka Urlopy pozwala na sk³adanie wniosków o przyznanie urlopu oraz zarz±dzanie nimi. Z ka¿dy u¿ytkownikiem zwi±zana jest liczba przys³uguj±cych mu wolnych dni(do wykorzystania na urlopy).
+
+W odniesieniu do tej wtyczki administratorem jest osoba z uprawnieniem \verb+admin+ we wtyczce Urlopy, a koordynatorem -- menad¿er grupy(dowolnej), do której nale¿y u¿ytkownik. 
+\\
+
+Przyznawanie urlopów odbywa siê w kilku krokach:
+\begin{enumerate}
+\item U¿ytkownik sk³ada wniosek o urlop.
+\item Wniosek zostaje zaakceptowany, odrzucony, albo odes³any do poprawki przez dowolnego koordynatora.
+\item Je¶li wniosek zosta³ zaakceptowany przez koordynatora, to dowolny administrator mo¿e podj±æ akcje analogicznie jak w punkcie 2.
+\end{enumerate}
+
+Wniosek uznaje siê za zaakceptowany je¶li zostanie zaakceptowany przez administratora. Ponadto z ka¿dym wnioskiem zwi±zana jest liczba dni roboczych w trakcie tego urlopu, która zostaje odjêta od ilo¶ci pozosta³ych dni wolnych danego u¿ytkownika.
+
+Dodatkowo wtyczka Urlopy pozwala na zmianê(przez uprawnione osoby) ilo¶ci dni wolnych, przys³uguj±cych dowolnemu u¿ytkownikowi.
+
+\subsection{Uprawnienia}
+Ka¿dy u¿ytkownik mo¿e przegl±daæ swoje wnioski o urlop oraz edytowaæ te jeszcze nie zaakceptowane. Ponadto mo¿e zmieniaæ  status swoich wniosków na odrzucone.
+
+Koordynator mo¿e akceptowaæ, odrzucaæ lub cofaæ do poprawki wnioski u¿ytkowników grup, których jest menad¿erem.
+
+Administrator mo¿e akceptowaæ, odrzucaæ lub cofaæ do poprawki wniski ju¿ zaakceptowane przez koordynatora. Ponadto mo¿e zmieniaæ liczbê dni wolnych przys³uguj±cych urzytkownikom.
 
 
 
@@ -315,7 +349,7 @@ Tego typu rozwi±zanie pojawia³o siê bardzo czêsto w tworzonym przez nas kodzie. 
 
 \section{System uprawnieñ}
 
-Problemem okaza³o siê stworzenie systemu uprawnieñ, który pasowa³by do logiki aplikacji biznesowej potencjalnie ka¿dej wtyczki dzia³aj±cej w eenecie. Najbardziej rozwiniêtymi wtyczkami, jak± mieli¶my okazjê implementowaæ przy okazji implementowania samego zrêbu eenet by³y Urlopy\ref{r:urlopownik} i Zasoby\ref{r:zasoby}.
+Problemem okaza³o siê stworzenie systemu uprawnieñ, który pasowa³by do logiki aplikacji biznesowej potencjalnie ka¿dej wtyczki dzia³aj±cej w eenecie. Najbardziej rozwiniêtymi wtyczkami, jak± mieli¶my okazjê implementowaæ przy okazji implementowania samego zrêbu eenet by³y Urlopy\ref{r:urlopy} i Zasoby\ref{r:zasoby}.
 
 Na potrzeby dwuetapowej weryfikacji wniosku urlopowego stworzyli¶my grupy u¿ytkowników. Rozwi±zanie to niestety wystaje poza sam± wtyczkê Urlopy i zachodzi na kompetencje wtyczki U¿ytkownicy, tote¿ musieli¶my zrobiæ grupy tak, aby da³o siê je potencjalnie wykorzystaæ ponownie w kolejnych wtyczkach.
 
@@ -327,12 +361,17 @@ Wewn±trz wtyczki Zasoby znajduje siê wiele modeli, które maj± ró¿ne pola, ró¿ne 
 \begin{itemize}
 \item instancja zasobu ma jednego w³a¶ciciela -- przyk³adowo, klucz publiczny SSH mo¿e nale¿eæ do jednej osoby,
 \item instancja zasobu ma wielu w³a¶cicieli -- przyk³adowo, jedna licencja na oprogramowanie mo¿e byæ na wiele stanowisk,
-\item instancja zasobu ma wiele podinstancji -- przyk³adowo, mamy w firmie 20 monitorów 24'' marki Contoso, z których 5 ma Alicja, a 3 ma Bob.
+\item instancja zasobu ma wiele podinstancji -- przyk³adowo, mamy w firmie 20 monitorów 24'' marki Contoso, z których 5 ma Alicja, a 3 ma Bartek.
 \end{itemize}
+
 Oprócz tego nale¿y w modelu zdefiniowaæ czy w³a¶ciciel mo¿e edytowaæ dany zasób (co jest potrzebne w celu unikniêcia znikania kosztownych zasobów z rejestru) oraz czy u¿ytkownicy niebêd±cy w³a¶cicielami mog± dany zasób widzieæ (przydatne we wszelkich has³ach dostêpu, licencjach na oprogramowanie).
 
-¯eby to zrealizowaæ, pos³u¿yli¶my siê metaklasami pythona. Dziêki ich wykorzystaniu definicja modelu zajmuje kilkana¶cie linijek, a poza modelem nale¿y jedynie formularz edycyjny.
+W celu realizacji tego, pos³u¿yli¶my siê metaklasami pythona. Dziêki ich wykorzystaniu definicja modelu zajmuje kilkana¶cie linijek, a poza modelem nale¿y jedynie stworzyæ formularz edycyjny.
 
+\section{Wersjonowanie}
+W celu zapamiêtania historii zmian w bazie danych zosta³o zaimplementowane wersjonowanie. Zosta³ do tego wykorzystany dodatego do Django o nazwie \verb+django-reversion+. Zapamiêtuje on wszystkie dokonane zmiany instancji djangowych modeli(np. u¿ytkownika, zasobu, wniosku o urlop) oraz pozwala na ³atwe przywracanie poprzednich wersji.
+
+Dziêki u¿yciu wersjonowania administratorzy posiadaj± kompletn± historiê zmian, co rozwi±zuje problem niechcianych zmian(np. pomy³ek) w aplikacji eenet.
 
 
 %TODO Patryk
@@ -346,16 +385,17 @@ Oprócz tego nale¿y w modelu zdefiniowaæ czy w³a¶ciciel mo¿e edytowaæ dany zasób 
 \chapter{Osi±gniêcia}\label{r:osiagniecia}
 \section{Produkt}
 Aplikacja eenet znajduje siê pod adresem https://eenet.laboratorium.ee.
-Wtyczki zawarte w niej zgodnie z za³o¿eniem zamawiaj±cego s± u¿ywane przez pracowników firmy Laboratorium EE. ¦wiadczy o ponad 50 zarejestrowanych u¿ytkowników oraz du¿a liczba zg³oszonych przez nich b³êdów wewn±trz aplikacji. Problemy zg³aszane przez u¿ytkowników mia³y ró¿norakie pod³o¿e, poczynaj±c od b³êdów w t³umaczeniach, przechodz±c przez uwagi dotycz±cye zmian w interfacu u¿ytkownika, a koñcz±c na pro¶bach o dodanie nowej logiki w aplikacji. Ponadto planowane jest dalsze rozwijanie aplikacji przez przysz³ych praktykantów w Laboratorium EE. Co wiêcej eenet bêdzie sprzedawany w pakiecie wraz z innymi produktami firmy przeznaczonymi dla ma³ych i ¶rednich przedsiêbiorstw. 
+Wtyczki zawarte w niej zgodnie z za³o¿eniem zamawiaj±cego s± u¿ywane przez pracowników firmy Laboratorium EE. O sukcesie ¶wiadczy ponad 50 zarejestrowanych u¿ytkowników oraz du¿a liczba zg³oszonych przez nich uwag odno¶nie aplikacji. Uwagi zg³aszane przez u¿ytkowników mia³y ró¿norakie pod³o¿e, poczynaj±c od b³êdów w t³umaczeniach, przechodz±c przez uwagi dotycz±cye zmian w interfejsie u¿ytkownika, a koñcz±c na pro¶bach o dodanie nowej logiki w aplikacji. Ponadto planowane jest dalsze rozwijanie aplikacji przez przysz³ych praktykantów w Laboratorium EE. Co wiêcej, planowana jest sprzeda¿ eenetu w pakiecie wraz z innymi produktami firmy przeznaczonymi dla ma³ych i ¶rednich przedsiêbiorstw. 
 
 \section{Tworzenie produktu}
 Sposób w jaki powsta³a aplikacja, czas jej wykonania oraz jako¶æ wykonania zadowoli³ klienta na tyle, ¿e wszystkim cz³onkom zespo³u zosta³a zaproponowana dalsza wspó³praca, w nowych projektach.
 
 
 %TODO niby all ale i tak bedzie musiala napisac to jedna osoba - nie robert
+%FIXME do wywalenia bo pokrywa sie z oraca wlozana w projekt(chyba zeby tam wypisac co zostalo zrobione a tu kto co konkretnie zrobil, do uzgodnienia)
 \chapter{Wykonana praca przez poszczególne osoby w projekcie}\label{r:ktopraca}
 
-%TODO niby all ale i tak bedzie musiala napisac to jedna osoba - nie robert
+%TODO niby all ale i tak bedzie musiala napisac to jedna osoba - nie robert; moge to zrobic(borys) jak ktos mi powie co tu ma sie znalezc, bo nie wiem
 \chapter{Zawarto¶æ kodu dostarczonego wraz z prac±}\label{r:kod}
 
 

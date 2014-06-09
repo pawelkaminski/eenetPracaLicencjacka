@@ -103,30 +103,24 @@
 %TODO Robert/Pawe³ ~to chyba ma byæ krótkie natomiast sam pomys³ mo¿esz 
 \chapter*{Wprowadzenie}
 \addcontentsline{toc}{chapter}{Wprowadzenie}
+Przedmiotem pracy licencjackiej jest opis zrêbu oraz jego implementacja wraz z przyk³adowymi aplikacjami.
+Projekt zosta³ zlecony przez firmê Laboratorium EE\footnote{\url{http://laboratorium.ee/}}.
+Klient zwróci³ sie do nas, gdy¿ potrzebowa³ narzêdzi do usprawnienia zarz±dzania firm± oraz do podniesienia poziomu komunikacji wewn±trz niej.
 
-Blabalizator ró¿nicowy jest podstawowym narzêdziem blabalii
-fetorycznej.  Dlatego naukowcy z~ca³ego ¶wiata prze¶cigaj± siê
-w~próbach efektywnej implementacji.  Opracowana przez prof. Fifaka
-teoria fetorów $\sigma$-$\rho$ otwiera w~tej dziedzinie nowe
-mo¿liwo¶ci.  Wykorzystujemy je w~niniejszej pracy.
+Praca sk³ada siê z~X rozdzia³ów i~dodatków.
 
-Przystêpne wprowadzenie do blabalii fetorycznej mo¿na znale¼æ w~pracy
-Fifaka i~Gryzogrzechotalskiego %\cite{ffgg}.
-Dlatego w~niniejszym
-tek¶cie ograniczymy siê do przypomnienia pojêæ podstawowych.
-
-Praca sk³ada siê z~piêciu rozdzia³ów i~dodatków.
-W~rozdziale~\ref{r:pojecia} przypomniano podstawowe pojêcia blabalii
-fetorycznej.  Dotychczasowe próby implementacji blablizatora
-ró¿nicowego zestawiono w~rozdziale~%\ref{r:losers}.
-Rozdzia³~%\ref{r:fifak}
-przedstawia teoriê Fifaka i~wyja¶nia sposób jej
-wykorzystania w~implementacji blabalizatora.  W~rozdziale %\ref{r:impl}
-przedstawiono algorytm blabalizy i~realizuj±cy go program komputerowy.
-Ostatni rozdzia³ zawiera przemy¶lenia dotycz±ce mo¿liwego wp³ywu
-dostêpno¶ci efektywnej blabalizy numerycznej na rozwój blabalii
-fetorycznej.  W~dodatkach umieszczono najciekawszy fragment programu,
-przyk³adowe dane i~wyniki dzia³ania programu.
+W~rozdziale~\ref{r:pojecia} przypomniano podstawowe pojêcia u¿ywane w dokumencie.
+Ogólny opis problemu wraz z prób± rozwi±zania go zawarto w~rozdziale~\ref{r:opis}.
+Analizê konkurencyjnych rozwi±zañ zestawiono w~rozdziale~\ref{r:konkurencja}
+%Dotychczasowe próby implementacji blablizatora
+%ró¿nicowego zestawiono w~rozdziale~\ref{r:losers}.
+%Rozdzia³~\ref{r:fifak} przedstawia teoriê Fifaka i~wyja¶nia sposób jej
+%wykorzystania w~implementacji blabalizatora.  W~rozdziale \ref{r:impl}
+%przedstawiono algorytm blabalizy i~realizuj±cy go program komputerowy.
+%Ostatni rozdzia³ zawiera przemy¶lenia dotycz±ce mo¿liwego wp³ywu
+%dostêpno¶ci efektywnej blabalizy numerycznej na rozwój blabalii
+%fetorycznej.  W~dodatkach umieszczono najciekawszy fragment programu,
+%przyk³adowe dane i~wyniki dzia³ania programu.
 
 %TODO WSZYSCY WRZUCAJA TUTAJ JAK LECI CO JEST POTRZEBNE
 \chapter{Podstawowe pojêcia}\label{r:pojecia}
@@ -167,11 +161,42 @@ K\^un (fooistyczny mêdrzec, XIX w. p.n.e.):
 \item \textit{open source} -- otwarte oprogramowanie -- oprogramowanie, którego licencja pozwala na legalne i nieodp³atne kopiowane zarówno kodu wynikowego jak i ¼ród³owego oraz na dowolne modyfikacje kodu ¼ród³owego;
 \item OAuth -- otwarty standard autoryzuj±cy, pozwalaj±cy u¿ytkownikom dzieliæ swoje zasoby(np. dane, kontakty, zdjêcia) przechowywane na jednej stronie z inn± stron±. Dziêki temu mo¿na u¿ywaæ jednego konta(np. Google, Facebook, Twitter itp.) do logwania siê w wielu miejscach.
 
-
 \end{itemize}
 
 %TODO Robert
 \chapter{Opis projektu}\label{r:opis}
+Okazuje siê, ¿e przy zarzadzaniu firm± do wielu problemów nie wystarczaj± arkusze kalkulacyjne, dokumenty tekstowe i komunikatory -- potrzeba oprogramowania, które nada zgromadzonym danym sens (kontekst).
+
+Jako ¿e nie nikt nie by³ i nigdy nie bêdzie, w stanie zdefiniowaæ ostatecznych wymagañ dla problemu zarz±dzania firm±, zdecydowali¶my ¿e najlepszym rozwi±zaniem bedzie stworzenie zrêbu.
+Takie rozwi±zanie zapewnia ³atw± w~przysz³o¶ci rozszerzalno¶æ, w dodatku dziêki posiadaniu ¶rodowiska s³u¿±cego do tworzenia i obs³ugi aplikacji biurowych,
+mo¿na znacznie ograniczyæ koszty pisania poszczególnych funkcjonalno¶ci. ¦rodowisko bêdzie zapewnia³o pomocnicze funkcjonalno¶ci wtyczkom (np. dostêp do bazy danych, logowanie u¿ytkowników, uprawnienia) -- wtyczki dziêki temu nie bêd± musia³y same siê zajmowaæ tymi kwestiami, takie rozumowanie jest zgodne z zasad± DRY.
+
+Dodatkow± zalet± jest ujednolicenie podej¶cia, jakie nale¿y zastosowaæ pisz±c tak± aplikacjê -- dziêki temu bêdzie mo¿na ³atwo wdro¿yæ nowego programistê aplikacji.
+Oczywi¶cie takie ujednolicone podej¶cie wi±¿e siê te¿ z narzuceniem pewnych barier, lecz w naszej ocenie przy rozwi±zywaniu tego typu problemu ograniczenia pojawia siê wcze¶niej czy pó¼niej, wiêc lepiej ustanowiæ je na samym poczatku.
+
+
+Samo stworzenie ¶rodowiska nie rozwi±¿e jednak obecnych problemów zleceniodawcy, utworzyli¶my wiêc kilka podstawowych wtyczek pomagaj±cych Laboratorium EE.\\
+W pocz±tkowej fazie negocjacji z klientem wyniknê³y nastepujace wymagania dotycz±ce gotowej aplikacji przyk³adowej, nale¿y co nastepuje:
+\begin{itemize}
+ \item Udostepniæ zaawansowany system zarz±dzania u¿ytkownikami.
+ \item Stworzyæ mechanizmy do inwentaryzacji dóbr i informacji.
+ \item Zautomatyzowaæ proces sk³adania pró¶b o urlopy w firmie.
+\end{itemize}
+Jako podstawê aplikacji stworzyli¶my cztery wtyczki:
+\begin{itemize}
+ \item U¿ytkownicy \ref{r:uzytkownicy}
+ \item Uprawnienia \ref{r:uprawnienia}
+ \item Powiadomienia \ref{r:powiadomienia}
+ \item Kafle \ref{r:kafle}
+\end{itemize}
+Dwie kolejne rozwi±zuj± problemy z inwentaryzacj± i urlopami:
+\begin{itemize}
+ \item Urlopy \ref{r:urlopy}
+ \item Zasoby \ref{r:zasoby}
+\end{itemize}
+
+
+Ca³e oprogramowanie powstawa³o przy ¶cis³ej wspó³pracy z klientem, zarówno przy ustalaniu specyfikacji jak i od strony merytorycznej podczas tworzenia eenetu.
 
 %TODO Pawe³
 \chapter{Rozwi±zania konkurencyjne}\label{r:konkurencja}
@@ -199,7 +224,7 @@ Back-end eenetu zosta³ stworzony we frameworku Django. S³u¿y on nastêpuj±cym cel
 \item zawiera w sobie koñcówki API, z którymi komunikuje siê GUI.
 \end{itemize}
 
-Do uruchomienia aplikacji w trybie dewelopersim (przy ustawionym \verb+DEBUG = True+ w ustawieniach projektu) wystarczy sam kod zapewniany przez Django, mianowicie plik
+Do uruchomienia aplikacji w trybie deweloperskim (przy ustawionym \verb+DEBUG = True+ w ustawieniach projektu) wystarczy sam kod zapewniany przez Django, mianowicie plik
 \verb+manage.py+ -- Django zajmuje siê wówczas uruchomieniem serwera HTTP obs³uguj±cego zarówno ¿±dania zwi±zane z API, jak i serwowanie plików statycznych.
 
 Do instalacji produkcyjnej potrzeba jednak po¶rednicz±cego serwera-bramy, który zajmie siê serwowaniem plików statycznych i przekierowaniem odpowiednich ¿±dañ do Django. Zdecydowali¶my siê na serwer nginx z powodu popularno¶ci takiego po³±czenia Django - nginx. Oczywi¶cie zawsze jest mo¿liwo¶æ zmiany serwera-bramy na np. Apache2 czy lighttpd.
@@ -273,7 +298,7 @@ Pozosta³e rodzaje uprawnieñ s± oczywi¶cie definiowane dla konkretnej wtyczki.
 
 Kolejn± rzecz± zrealizowan± wewn±trz tej wtyczki s± grupy u¿ytkowników. ¯eby unikn±æ ¿mudnego przydzielania uprawnieñ u¿ytkownik po u¿ytkowniku, mo¿na ich wszystkich dodaæ do pewnej grupy i ustawiæ te uprawnienia grupie. Poza uprawnieniami i list± cz³onków grupa posiada równie¿ listê mened¿erów -- ta funkcjonalno¶æ jest zwi±zana z logik± biznesow± hierarchii pracowników w firmie Laboratorium EE (wiêcej na ten temat w opisie wtyczki Urlopy\ref{r:urlopy}).
 
-\subsection{Uprawnienia}
+\subsection{Uprawnienia}\label{r:uprawnienia}
 
 Ka¿dy u¿ytkownik wtyczki U¿ytkownicy ma dostêp do listy u¿ytkowników eenetu oraz podgl±d ich podstawowych danych i uprawnieñ.
 

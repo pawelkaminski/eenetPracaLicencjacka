@@ -321,37 +321,86 @@ Administrator nie posiada ¿adnych dodatkowych uprawnieñ.
 \section{Urlopy}\label{r:urlopy}
 
 \subsection{Opis}
-Wtyczka Urlopy pozwala na sk³adanie wniosków o przyznanie urlopu oraz zarz±dzanie nimi. Z ka¿dy u¿ytkownikiem zwi±zana jest liczba przys³uguj±cych mu wolnych dni(do wykorzystania na urlopy).
+Wtyczka Urlopy pozwala na sk³adanie wniosków o przyznanie urlopu oraz zarz±dzanie nimi. Z ka¿dy u¿ytkownikiem zwi±zana jest liczba przys³uguj±cych mu wolnych dni do wykorzystania na urlopy.
+W odniesieniu do tej wtyczki administratorem jest osoba z uprawnieniem \verb+admin+ we wtyczce Urlopy.
+Z ka¿dym wnioskiem zwi±zana jest liczba dni roboczych w trakcie tego urlopu, która zostaje odjêta od ilo¶ci pozosta³ych dni wolnych danego u¿ytkownika.
+Wtyczka Urlopy pozwala tak¿e na zmianê (przez uprawnione osoby) ilo¶ci dni wolnych, przys³uguj±cych dowolnemu u¿ytkownikowi.
 
-W odniesieniu do tej wtyczki administratorem jest osoba z uprawnieniem \verb+admin+ we wtyczce Urlopy, a koordynatorem -- menad¿er grupy(dowolnej), do której nale¿y u¿ytkownik. 
-\\
+Dok³adniejsza logika biznesowa aplikacji znajduje siê w kolejnych podpunktach.
+
+\subsection{Algorytm przyznawania urlopów}
 
 Przyznawanie urlopów odbywa siê w kilku krokach:
 \begin{enumerate}
-\item U¿ytkownik sk³ada wniosek o urlop.
-\item Wniosek zostaje zaakceptowany, odrzucony, albo odes³any do poprawki przez dowolnego koordynatora.
-\item Je¶li wniosek zosta³ zaakceptowany przez koordynatora, to dowolny administrator mo¿e podj±æ akcje analogicznie jak w punkcie 2.
+\item
+	Urlopobiorca klika ,,Z³ó¿ pro¶bê'' w urlopowniku i wype³nia potrzebne dane:
+	\begin{itemize}
+	\item daty od-do urlopu,
+	\item typ urlopu,
+	\item komentarz do wniosku,
+	\item osobê, która ma zast±piæ,
+	\item koordynatora urlopu.
+	\end{itemize}
+\item
+	Wybrany koordynator dostaje powiadomienie, ¿e ma wniosek do przejrzenia.
+\item
+	Pierwszy etap akceptacji -- koordynator akceptuje b±d¼ nie dany wniosek. \\
+	Je¿eli nie akceptuje:
+	\begin{itemize}
+	\item urlopobiorca dostaje powiadomienie o odrzuceniu wniosku.
+	\end{itemize}
+	Je¿eli akceptuje:
+	\begin{itemize}
+	\item urlopobiorca dostaje powiadomienie o zaakceptowaniu wniosku przez koordynatora
+	\item wszyscy administratorzy dostaj± powiadomienie o konieczno¶ci dalszej weryfikacji wniosku i przechodzimy do punktu 4.
+(je¶li wybrany koordynator jest przypadkiem administratorem, mo¿e zrobiæ punkty 3. i 4. za jednym zamachem)
+	\end{itemize}
+\item
+	Drugi etap akceptacji - administrator akceptuje b±d¼ nie dany wniosek. \\
+	Je¿eli nie akceptuje:
+	\begin{itemize}	
+	\item urlopobiorca dostaje powiadomienie o odrzuceniu wniosku
+	\end{itemize}	
+	Je¿eli akceptuje:
+	\begin{itemize}	
+	\item urlopobiorca dostaje powiadomienie o zaakceptowaniu wniosku.
+	\end{itemize}
+
 \end{enumerate}
 
-Wniosek uznaje siê za zaakceptowany je¶li zostanie zaakceptowany przez administratora. Ponadto z ka¿dym wnioskiem zwi±zana jest liczba dni roboczych w trakcie tego urlopu, która zostaje odjêta od ilo¶ci pozosta³ych dni wolnych danego u¿ytkownika.
+\subsection{Przydzia³ dostêpnych koordynatorów}
 
-Dodatkowo wtyczka Urlopy pozwala na zmianê(przez uprawnione osoby) ilo¶ci dni wolnych, przys³uguj±cych dowolnemu u¿ytkownikowi.
+Koordynatorem urlopu mo¿e byæ:
+\begin{itemize}
+\item dla zwyk³ego u¿ytkownika -- dowolny mened¿er dowolnej grupy, do której nale¿y dany u¿ytkownik,
+\item dla mened¿era pewnej grupy -- dowolny mened¿er dowolnej grupy, do której nale¿y dany u¿ytkownik-mened¿er albo dowolny administrator Urlopów,
+\item dla administratora Urlopów -- dowolny mened¿er dowolnej grupy, do której nale¿y dany u¿ytkownik-administrator albo dowolny administrator Urlopów.
+\end{itemize}
 
 \subsection{Uprawnienia}
-Ka¿dy u¿ytkownik mo¿e przegl±daæ swoje wnioski o urlop oraz edytowaæ te jeszcze nie zaakceptowane. Ponadto mo¿e zmieniaæ  status swoich wniosków na odrzucone.
+Ka¿dy u¿ytkownik mo¿e przegl±daæ swoje wnioski o urlop oraz edytowaæ te jeszcze nie zaakceptowane. Ponadto mo¿e zmieniaæ status swoich wniosków na odrzucone.
 
 Koordynator mo¿e akceptowaæ, odrzucaæ lub cofaæ do poprawki wnioski u¿ytkowników grup, których jest menad¿erem.
 
-Administrator mo¿e akceptowaæ, odrzucaæ lub cofaæ do poprawki wniski ju¿ zaakceptowane przez koordynatora. Ponadto mo¿e zmieniaæ liczbê dni wolnych przys³uguj±cych u¿ytkownikom.
+Administrator mo¿e akceptowaæ, odrzucaæ lub cofaæ do poprawki wnioski ju¿ zaakceptowane przez koordynatora. Ponadto mo¿e zmieniaæ liczbê dni wolnych przys³uguj±cych u¿ytkownikom.
 
 
 
 \section{Zasoby}\label{r:zasoby}
 
+\subsection{Opis}
+\textit{Do zrobienia.}
+\subsection{Uprawnienia}
+\textit{Do zrobienia.}
+
 
 
 \section{Kafle}\label{r:kafle}
 
+\subsection{Opis}
+\textit{Do zrobienia.}
+\subsection{Uprawnienia}
+\textit{Do zrobienia.}
 
 
 

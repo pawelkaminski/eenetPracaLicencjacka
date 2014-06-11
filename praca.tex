@@ -127,10 +127,6 @@ Analizê konkurencyjnych rozwi±zañ zestawiono w~rozdziale~\ref{r:konkurencja}
 %TODO WSZYSCY WRZUCAJA TUTAJ JAK LECI CO JEST POTRZEBNE
 \chapter{Podstawowe pojêcia}\label{r:pojecia}
 
-Pojêciem pierwotnym blabalii fetorycznej jest \emph{blaba}.
-Blabali¶ci nie podaj± jego definicji, mówi±c za Ciach-Pfe t-\=am
-K\^un (fooistyczny mêdrzec, XIX w. p.n.e.):
-
 \section{Definicje}
 
 \begin{itemize}
@@ -178,7 +174,7 @@ Oczywi¶cie takie ujednolicenie wi±¿e siê z narzuceniem pewnych barier, lecz w na
 
 
 Samo stworzenie ¶rodowiska nie rozwi±¿e jednak obecnych problemów zleceniodawcy, utworzyli¶my wiêc kilka podstawowych wtyczek pomagaj±cych Laboratorium EE.\\
-W pocz±tkowej fazie negocjacji z~klientem wyniknê³y nastepujace wymagania dotycz±ce gotowej aplikacji przyk³adowej, nale¿y co nastepuje:
+W pocz±tkowej fazie negocjacji z~klientem wyniknê³y nastepujace wymagania dotycz±ce gotowej aplikacji przyk³adowej, nale¿y co nastêpuje:
 \begin{itemize}
  \item Udostepniæ zaawansowany system zarz±dzania u¿ytkownikami.
  \item Stworzyæ mechanizmy do inwentaryzacji dóbr i informacji.
@@ -186,29 +182,28 @@ W pocz±tkowej fazie negocjacji z~klientem wyniknê³y nastepujace wymagania dotycz
 \end{itemize}
 Jako podstawê aplikacji stworzyli¶my trzy wtyczki:
 \begin{itemize}
- \item U¿ytkownicy \ref{r:uzytkownicy}
- \item Powiadomienia \ref{r:powiadomienia}
- \item Kafle \ref{r:kafle}
+ \item \nameref{r:uzytkownicy}
+ \item \nameref{r:powiadomienia}
+ \item \nameref{r:kafle}
 \end{itemize}
 Dwie kolejne rozwi±zuj± problemy z inwentaryzacj± i urlopami:
 \begin{itemize}
- \item Urlopy \ref{r:urlopy}
- \item Zasoby \ref{r:zasoby}
+ \item \nameref{r:urlopy}
+ \item \nameref{r:zasoby}
 \end{itemize}
 
 Ca³e oprogramowanie powstawa³o przy ¶cis³ej wspó³pracy z klientem, zarówno przy ustalaniu specyfikacji jak i od strony merytorycznej podczas tworzenia eenetu.
 
-Do koñcowej implementacji projektu eenet zosta³a dodana dokumentacja stworzona za pomoc± narzêdzi \textit{doxygen} i \textit{docular},
-ponadto zosta³a utworzony podrêcznik u¿ytkownika oraz opis instalacji i konfiguracji aplikacji.
+Do koñcowej implementacji projektu eenet zosta³ dodany podrêcznik u¿ytkownika oraz opis instalacji i konfiguracji aplikacji.
 
 %TODO Pawe³
 \chapter{Rozwi±zania konkurencyjne}\label{r:konkurencja}
 \section{Atlassian}
 Firma Atlassian dostarcza szeroki wachlarz aplikacji do zarz±dzania prac±. Ka¿da z funkcjonalno¶ci jest oddzieln± aplikacj±. Jest to zdecydowanie najlepiej wykonane narzêdzie na rynku jednak¿e cena ka¿dej z funkcjonalno¶ci jest bardzo wysoka i zwykle tylko du¿e przedsiêbiorstwa staæ na wykup potrzebnych licencji.
 \section{AppFlower}
-Open sourcowy framework do tworzenia ma³ych aplikacji, nie wymagaj±cy programowania, pozwalaj±cy na budowanie aplikacji z klocków. Plusem tego rozwi±zania jest to ¿e jest darmowy, natomiast minusem fakt, ¿e ³atwo¶æ tworzenia aplikacji powoduje zbyt ograniczon± funkcjonalno¶æ, jak na wiêksze potrzeby ma³ych i ¶rednich przedsiêbiorstw.
+Framework z otwartym ¼ród³em do tworzenia ma³ych aplikacji, nie wymagaj±cy programowania, pozwalaj±cy na budowanie aplikacji z klocków. Plusem tego rozwi±zania jest to ¿e jest darmowy i otwarty, natomiast minusem fakt, ¿e budowane w nim aplikacje nie pozwalaj± na zaimplementowanie zaawansowanej logiki biznesowej.
 \section{OpenBiz AppBuilder}
-P³atny framework do tworzenia ma³ych aplikacji, pozwalaj±cy na handlowanie nimi. Mocn± stron± tego rozwi±zania jest do¶æ du¿a dowolno¶æ w tworzeniu nowych aplikacji, natomiast s³absz± -- jej do¶æ wysoka cena oraz brak dobrej dokumentacji do ¶rodowiska tworzenia nowych wtyczek.
+P³atny framework do tworzenia ma³ych aplikacji, pozwalaj±cy na handlowanie nimi. Mocn± stron± tego rozwi±zania jest do¶æ du¿a dowolno¶æ w tworzeniu nowych aplikacji, natomiast s³ab± -- jej do¶æ wysoka cena oraz brak dobrej dokumentacji do ¶rodowiska tworzenia nowych wtyczek.
 
 
 %TODO Patryk
@@ -397,6 +392,7 @@ Oprócz tego nale¿y w modelu zdefiniowaæ czy w³a¶ciciel mo¿e edytowaæ dany zasób 
 W celu realizacji tego, pos³u¿yli¶my siê metaklasami pythona. Dziêki ich wykorzystaniu definicja modelu zajmuje kilkana¶cie linijek, a poza modelem nale¿y jedynie stworzyæ formularz edycyjny.
 
 \section{Wersjonowanie}
+
 W celu zapamiêtania historii zmian w bazie danych zosta³o zaimplementowane wersjonowanie. Zosta³ do tego wykorzystany dodatego do Django o nazwie \verb+django-reversion+. Zapamiêtuje on wszystkie dokonane zmiany instancji djangowych modeli(np. u¿ytkownika, zasobu, wniosku o urlop) oraz pozwala na ³atwe przywracanie poprzednich wersji.
 
 Dziêki u¿yciu wersjonowania administratorzy posiadaj± kompletn± historiê zmian, co rozwi±zuje problem niechcianych zmian(np. pomy³ek) w aplikacji eenet.
@@ -405,6 +401,7 @@ Dziêki u¿yciu wersjonowania administratorzy posiadaj± kompletn± historiê zmian, 
 %TODO Patryk
 \chapter{W³o¿ona w projekt praca}\label{r:wlozonapraca}
 
+\textit{Do zrobienia.}
 
 % TODO tutaj co¶ na kszta³t timeline'u kiedy kto co robi³
 % i krotkie podsumowanie ile linii kodu pythona, javascriptu napisano (?)
@@ -418,10 +415,14 @@ Wtyczki zawarte w niej zgodnie z za³o¿eniem zamawiaj±cego s± u¿ywane przez praco
 \section{Tworzenie produktu}
 Sposób w jaki powsta³a aplikacja, czas jej wykonania oraz jako¶æ wykonania zadowoli³ klienta na tyle, ¿e wszystkim cz³onkom zespo³u zosta³a zaproponowana dalsza wspó³praca, w nowych projektach.
 
+\textit{Dalsza czê¶æ do zrobienia.}
+
 
 %TODO niby all ale i tak bedzie musiala napisac to jedna osoba - nie robert
 %FIXME do wywalenia bo pokrywa sie z oraca wlozana w projekt(chyba zeby tam wypisac co zostalo zrobione a tu kto co konkretnie zrobil, do uzgodnienia)
 \chapter{Wykonana praca przez poszczególne osoby w projekcie}\label{r:ktopraca}
+
+\textit{Do zrobienia.}
 
 %TODO niby all ale i tak bedzie musiala napisac to jedna osoba - nie robert; moge to zrobic(borys) jak ktos mi powie co tu ma sie znalezc, bo nie wiem
 \chapter{Zawarto¶æ kodu dostarczonego wraz z prac±}\label{r:kod}

@@ -109,20 +109,19 @@ Klient zwróci³ sie do nas, gdy¿ potrzebowa³ narzêdzi do usprawnienia zarz±dzania
 Problemy zleceniodawcy wyniknê³y z szybkiego ekspansywnego rozwoju firmy.
 Aplikacja powsta³a w wyniku naszej pracy zosta³a nazwana EEnet, gdy¿ ma ³±czyæ pracowników firmy.
 
-Praca sk³ada siê z~X rozdzia³ów i~dodatków.
+Praca sk³ada siê z~9 rozdzia³ów i~dodatków:
+\begin{itemize}
+\item[\ref{r:pojecia}]       -- podstawowe pojêcia u¿ywane w dokumencie,
+\item[\ref{r:opis}]          -- ogólny opis problemu wraz z propozycj± rozwi±zania,
+\item[\ref{r:konkurencja}]   -- zestawienie i analiza konkurencyjnych rozwi±zañ,
+\item[\ref{r:technologie}]   -- przegl±d technologii zaadaptowanych w projekcie, zarówno back-endowych jak i front-endowych,
+\item[\ref{r:wtyczki}]       -- opis dzia³ania poszczególnych gotowych wtyczek wraz z opisem ich logiki biznesowej i uprawnieñ u¿ytkowników,
+\item[\ref{r:rozwiazania}]   -- konkretne rozwi±zania implementacyjne, które nie wynika³y wprost z zaprezentowanej przez klienta logiki biznesowej,
+\item[\ref{r:praca}]         -- analiza wykonanej pracy nad projektem,
+\item[\ref{r:osiagniecia}]   -- dotychczasowe osi±gniêcia zrêbu eenet oraz naszego zespo³u.
 
-W~rozdziale~\ref{r:pojecia} przypomniano podstawowe pojêcia u¿ywane w dokumencie.
-Ogólny opis problemu wraz z prób± rozwi±zania go zawarto w~rozdziale~\ref{r:opis}.
-Analizê konkurencyjnych rozwi±zañ zestawiono w~rozdziale~\ref{r:konkurencja}
-%Dotychczasowe próby implementacji blablizatora
-%ró¿nicowego zestawiono w~rozdziale~\ref{r:losers}.
-%Rozdzia³~\ref{r:fifak} przedstawia teoriê Fifaka i~wyja¶nia sposób jej
-%wykorzystania w~implementacji blabalizatora.  W~rozdziale \ref{r:impl}
-%przedstawiono algorytm blabalizy i~realizuj±cy go program komputerowy.
-%Ostatni rozdzia³ zawiera przemy¶lenia dotycz±ce mo¿liwego wp³ywu
-%dostêpno¶ci efektywnej blabalizy numerycznej na rozwój blabalii
-%fetorycznej.  W~dodatkach umieszczono najciekawszy fragment programu,
-%przyk³adowe dane i~wyniki dzia³ania programu.
+\end{itemize}
+
 
 %TODO WSZYSCY WRZUCAJA TUTAJ JAK LECI CO JEST POTRZEBNE
 \chapter{Podstawowe pojêcia}\label{r:pojecia}
@@ -137,7 +136,7 @@ Analizê konkurencyjnych rozwi±zañ zestawiono w~rozdziale~\ref{r:konkurencja}
 \item wtyczki przyk³adowe -- wtyczki, których stworzenie jest przewidziane w ramach wykonania aplikacji eenet;
 \item przegl±darka internetowa - program instalowany na urz±dzeniu u¿ytkownika, umo¿liwiaj±cy wy¶wietlanie stron WWW dostarczanych przez serwer;
 \item serwer produkcyjny -- komputer serwuj±cy stronê WWW, posiada bazê danych aplikacji;
-\item serwer developerski(testowy) -- maszyna, która s³u¿y do testowania ka¿dej wersji aplikacji, zanim ta trafi na serwer produkcyjny;
+\item serwer developerski (testowy) -- maszyna, która s³u¿y do testowania ka¿dej wersji aplikacji, zanim ta trafi na serwer produkcyjny;
 \item kopia bezpieczeñstwa -- informacje, które maj± s³u¿yæ do odtworzenia oryginalnych danych znajduj±cych siê na serwerze produkcyjnym, w przypadku ich utraty lub uszkodzenia;
 \item front-end -- czê¶æ kodu zapewniaj±ca graficzny i testowy interfejs, jest interpretowana przez przegl±darkê tzn. dzia³a po stronie u¿ytkownika;
 \item back-end -- czê¶æ kodu dzia³aj±ca po stronie serwera, odpowiada za logikê operacji na danych;
@@ -157,24 +156,28 @@ Analizê konkurencyjnych rozwi±zañ zestawiono w~rozdziale~\ref{r:konkurencja}
 \item ma³e i ¶rednie przedsiêbiorstwa -- firmy zatrudniaj±ce od 10 do 250 pracowników;
 \item UI (ang. \textit{User Interface}) -- interfejs u¿ytkownika -- czê¶æ aplikacji odpowiedzialna za interakcjê z odbiorc± koñcowym;
 \item \textit{open source} -- otwarte oprogramowanie -- oprogramowanie, którego licencja pozwala na legalne i nieodp³atne kopiowane zarówno kodu wynikowego jak i ¼ród³owego oraz na dowolne modyfikacje kodu ¼ród³owego;
-\item OAuth -- otwarty standard autoryzuj±cy, pozwalaj±cy u¿ytkownikom dzieliæ swoje zasoby(np. dane, kontakty, zdjêcia) przechowywane na jednej stronie z inn± stron±. Dziêki temu mo¿na u¿ywaæ jednego konta(np. Google, Facebook, Twitter itp.) do logwania siê w wielu miejscach.
+\item OAuth -- otwarty standard autoryzuj±cy, pozwalaj±cy u¿ytkownikom dzieliæ swoje zasoby(np. dane, kontakty, zdjêcia) przechowywane na jednej stronie z inn± stron±. Dziêki temu mo¿na u¿ywaæ jednego konta (np. Google, Facebook, Twitter itp.) do logwania siê w wielu miejscach.
 
 \end{itemize}
 
 %TODO Robert
 \chapter{Opis projektu}\label{r:opis}
-Okazuje siê, ¿e przy zarzadzaniu firm± do wielu problemów nie wystarczaj± arkusze kalkulacyjne, dokumenty tekstowe i komunikatory -- potrzeba oprogramowania, które nada zgromadzonym danym sens (kontekst).
 
-Jako ¿e nie nikt nie by³ i nigdy nie bêdzie, w stanie zdefiniowaæ ostatecznych wymagañ dla problemu zarz±dzania firm±, zdecydowali¶my ¿e najlepszym rozwi±zaniem bedzie stworzenie zrêbu.
+\section{Zarys zagadnienia}
+Okazuje siê, ¿e przy zarz±dzaniu firm± do wielu problemów nie wystarczaj± arkusze kalkulacyjne, dokumenty tekstowe i komunikatory -- potrzeba oprogramowania, które nada zgromadzonym danym sens w ramach kontekstu logiki biznesowej.
+
+Jako, ¿e nie nikt nie by³ i nigdy nie bêdzie w stanie zdefiniowaæ ostatecznych wymagañ dla problemu zarz±dzania firm±, zdecydowali¶my ¿e najlepszym rozwi±zaniem bêdzie stworzenie zrêbu.
+
 Takie rozwi±zanie zapewnia ³atw± w~przysz³o¶ci rozszerzalno¶æ, w~dodatku dziêki posiadaniu ¶rodowiska s³u¿±cego do tworzenia i~obs³ugi aplikacji biurowych,
 mo¿na znacznie ograniczyæ koszty pisania poszczególnych funkcjonalno¶ci. ¦rodowisko bêdzie zapewnia³o pomocnicze funkcjonalno¶ci wtyczkom (np. dostêp do bazy danych, logowanie u¿ytkowników, uprawnienia) -- wtyczki dziêki temu nie bêd± musia³y same siê zajmowaæ tymi kwestiami, takie rozumowanie jest zgodne z zasad± DRY.
 
 Dodatkow± zalet± jest ujednolicenie podej¶cia, jakie nale¿y zastosowaæ pisz±c tak± aplikacjê -- dziêki temu bêdzie mo¿na ³atwo wdro¿yæ nowego programistê aplikacji.
-Oczywi¶cie takie ujednolicenie wi±¿e siê z narzuceniem pewnych barier, lecz w naszej ocenie przy rozwi±zywaniu tego typu problemu ograniczenia pojawia siê wcze¶niej czy pó¼niej, wiêc lepiej ustanowiæ je na samym poczatku.
+Oczywi¶cie takie ujednolicenie wi±¿e siê z narzuceniem pewnych barier, lecz w naszej ocenie przy rozwi±zywaniu tego typu problemu ograniczenia pojawia siê wcze¶niej czy pó¼niej, wiêc lepiej ustanowiæ je na samym pocz±tku.
 
+\section{Wymagania}
 
-Samo stworzenie ¶rodowiska nie rozwi±¿e jednak obecnych problemów zleceniodawcy, utworzyli¶my wiêc kilka podstawowych wtyczek pomagaj±cych Laboratorium EE.\\
-W pocz±tkowej fazie negocjacji z~klientem wyniknê³y nastepujace wymagania dotycz±ce gotowej aplikacji przyk³adowej, nale¿y co nastêpuje:
+Samo stworzenie ¶rodowiska nie rozwi±¿e jednak obecnych problemów zleceniodawcy, utworzyli¶my wiêc kilka podstawowych wtyczek pomagaj±cych Laboratorium EE.
+W~pocz±tkowej fazie negocjacji z~klientem wynik³y nastêpuj±ce wymagania dotycz±ce zestawu ,,zr±b + gotowe wtyczki'':
 \begin{itemize}
  \item Udostepniæ zaawansowany system zarz±dzania u¿ytkownikami.
  \item Stworzyæ mechanizmy do inwentaryzacji dóbr i informacji.
@@ -192,7 +195,7 @@ Dwie kolejne rozwi±zuj± problemy z inwentaryzacj± i urlopami:
  \item \nameref{r:zasoby}
 \end{itemize}
 
-Ca³e oprogramowanie powstawa³o przy ¶cis³ej wspó³pracy z klientem, zarówno przy ustalaniu specyfikacji jak i od strony merytorycznej podczas tworzenia eenetu.
+Ca³e oprogramowanie powstawa³o przy ¶cis³ej wspó³pracy z klientem, zarówno przy ustalaniu specyfikacji, jak i od strony merytorycznej.
 
 Do koñcowej implementacji projektu eenet zosta³ dodany podrêcznik u¿ytkownika oraz opis instalacji i konfiguracji aplikacji.
 
@@ -294,7 +297,7 @@ Wtyczka U¿ytkownicy jest w zasadzie integraln± czê¶ci± frameworku eenet, jest ¶c
 Pozosta³e rodzaje uprawnieñ s± oczywi¶cie definiowane dla konkretnej wtyczki.
 
 
-Kolejn± rzecz± zrealizowan± wewn±trz tej wtyczki s± grupy u¿ytkowników. ¯eby unikn±æ ¿mudnego przydzielania uprawnieñ u¿ytkownik po u¿ytkowniku, mo¿na ich wszystkich dodaæ do pewnej grupy i ustawiæ te uprawnienia grupie. Poza uprawnieniami i list± cz³onków grupa posiada równie¿ listê mened¿erów -- ta funkcjonalno¶æ jest zwi±zana z logik± biznesow± hierarchii pracowników w firmie Laboratorium EE (wiêcej na ten temat w opisie wtyczki Urlopy\ref{r:urlopy}).
+Kolejn± rzecz± zrealizowan± wewn±trz tej wtyczki s± grupy u¿ytkowników. ¯eby unikn±æ ¿mudnego przydzielania uprawnieñ u¿ytkownik po u¿ytkowniku, mo¿na ich wszystkich dodaæ do pewnej grupy i ustawiæ te uprawnienia grupie. Poza uprawnieniami i list± cz³onków grupa posiada równie¿ listê mened¿erów -- ta funkcjonalno¶æ jest zwi±zana z logik± biznesow± hierarchii pracowników w firmie Laboratorium EE (wiêcej na ten temat w opisie wtyczki \nameref{r:urlopy}).
 
 \subsection{Uprawnienia}\label{r:uprawnienia}
 
@@ -389,19 +392,32 @@ Administrator mo¿e akceptowaæ, odrzucaæ lub cofaæ do poprawki wnioski ju¿ zaakce
 \section{Zasoby}\label{r:zasoby}
 
 \subsection{Opis}
-\textit{Do zrobienia.}
+Wtyczka Zasoby pozwala na zarz±dzanie zasobami biurowymi. Mog± byæ to zasoby materialne -- np. biurka, monitory, drukarki; mog± to byæ zasoby niematerialne -- jak np. licencja na oprogramowanie, klucz publiczny SSH. Oczywi¶cie ró¿ne instalacje eenetu mog± siê ró¿niæ rodzajami zasobów i informacjami w nich trzymanymi, zatem przygotowali¶my kilka przyk³adowych modeli potrzebnych akurat w Laboratorium EE, natomiast w razie potrzeby mo¿na je ³atwo zmodyfikowaæ.
+
+Ka¿dy zasób posiada informacje o przynale¿no¶ci do u¿ytkownika b±d¼ listy u¿ytkowników oraz pola takie, jakie akurat s± potrzebne w modelu. Ponadto trzeba zdefiniowaæ uprawnienia do tworzenia, modyfikacji, usuwania instancji danego zasobu -- wiêcej o tym w podrozdziale \nameref{r:metaklasy}.
+
+Wtyczka posiada kilka widoków: listowanie zasobów po rodzaju, listowanie zasobów po w³a¶cicielu, tworzenie i modyfikacja danego zasobu.
 \subsection{Uprawnienia}
-\textit{Do zrobienia.}
+Ka¿dy u¿ytkownik mo¿e tworzyæ, modyfikowaæ i usuwaæ zasoby, których jest w³a¶cicielem, o ile dany model na to pozwala -- jest to okre¶lane przez flagê \verb+can_owner_edit+ w definicji modelu zasobu.
+
+Ka¿dy u¿ytkownik mo¿e mieæ pe³en wgl±d w dowolny zasób, o ile dany model na to pozwala -- jest to okre¶lane przez flagê \verb+can_others_read+ w definicji modelu zasobu.
+
+Administrator aplikacji Zasoby ma pe³en dostêp do wszystkich zasobów.
+
+Oprócz standardowych uprawnieñ \verb+admin+ i \verb+access+ przewidziano równie¿ uprawnienia dynamicznie generowane, po jednym dla ka¿dego zasobu. Przyk³adowo, je¿eli zdefiniujemy zasób \textit{Monitor}, mo¿na nadaæ u¿ytkownikom uprawnienie \verb+monitor+ -- oznacza ono mo¿liwo¶æ pe³nej administracji tym typem zasobów.
 
 
 
 \section{Kafle}\label{r:kafle}
 
 \subsection{Opis}
-\textit{Do zrobienia.}
-\subsection{Uprawnienia}
-\textit{Do zrobienia.}
+Na stronie g³ównej aplikacji eenet znajduj± siê kafle wzorowane na Metro UI z Windows 8. Klikniêcie na taki kafel pozwala przej¶æ do wybranej aplikacji, przy okazji na kaflu mog± byæ umieszczone podsumowanie najwa¿niejszych informacji jakie dana wtyczka ma za zadanie zaprezentowaæ.
 
+Sama wtyczka Kafle s³u¿y do tego, ¿eby oprócz kafli zwi±zanych z wtyczkami móc tworzyæ kafle niestandardowe, które mo¿na tworzyæ bez modyfikacji kodu we frameworku. Przy pomocy wtyczki Kafle mo¿na takie kafle tworzyæ, ustawiaæ im kolor t³a, tekst, obrazek i URL otwierany po ich klikniêciu.
+
+
+\subsection{Uprawnienia}
+Ka¿dy u¿ytkownik widzi niestandardowe kafle na stronie g³ównej. Tylko administrator wtyczki Kafle mo¿e tworzyæ, modyfikowaæ, usuwaæ kafle.
 
 
 %TODO Patryk
@@ -421,13 +437,13 @@ Tego typu rozwi±zanie pojawia³o siê bardzo czêsto w tworzonym przez nas kodzie. 
 
 \section{System uprawnieñ}
 
-Problemem okaza³o siê stworzenie systemu uprawnieñ, który pasowa³by do logiki aplikacji biznesowej potencjalnie ka¿dej wtyczki dzia³aj±cej w eenecie. Najbardziej rozwiniêtymi wtyczkami, jak± mieli¶my okazjê implementowaæ przy okazji implementowania samego zrêbu eenet by³y Urlopy\ref{r:urlopy} i Zasoby\ref{r:zasoby}.
+Problemem okaza³o siê stworzenie systemu uprawnieñ, który pasowa³by do logiki aplikacji biznesowej potencjalnie ka¿dej wtyczki dzia³aj±cej w eenecie. Najbardziej rozwiniêtymi wtyczkami, jak± mieli¶my okazjê implementowaæ przy okazji implementowania samego zrêbu eenet by³y \nameref{r:urlopy} i \nameref{r:zasoby}.
 
 Na potrzeby dwuetapowej weryfikacji wniosku urlopowego stworzyli¶my grupy u¿ytkowników. Rozwi±zanie to niestety wystaje poza sam± wtyczkê Urlopy i zachodzi na kompetencje wtyczki U¿ytkownicy, tote¿ musieli¶my zrobiæ grupy tak, aby da³o siê je potencjalnie wykorzystaæ ponownie w kolejnych wtyczkach.
 
 Logika biznesowa wtyczki Zasoby wymaga³a natomiast, ¿eby stworzyæ uprawnienia administracyjne do poszczególnych zasobów. Oprócz tego jest kwestia publiczno¶ci i prywatno¶ci zasobów -- o tym wiêcej w kolejnym dziale.
 
-\section{Metaklasy we wtyczce \textit{Zasoby}}
+\section{Metaklasy we wtyczce \textit{Zasoby}}\label{r:metaklasy}
 
 Wewn±trz wtyczki Zasoby znajduje siê wiele modeli, które maj± ró¿ne pola, ró¿ne formularze edycyjne, ale maj± bardzo podobn± logikê uprawnieñ. Mo¿emy podzieliæ zasoby nastêpuj±co:
 \begin{itemize}
@@ -436,7 +452,7 @@ Wewn±trz wtyczki Zasoby znajduje siê wiele modeli, które maj± ró¿ne pola, ró¿ne 
 \item instancja zasobu ma wiele podinstancji -- przyk³adowo, mamy w firmie 20 monitorów 24'' marki Contoso, z których 5 ma Alicja, a 3 ma Bartek.
 \end{itemize}
 
-Oprócz tego nale¿y w modelu zdefiniowaæ czy w³a¶ciciel mo¿e edytowaæ dany zasób (co jest potrzebne w celu unikniêcia znikania kosztownych zasobów z rejestru) oraz czy u¿ytkownicy niebêd±cy w³a¶cicielami mog± dany zasób widzieæ (przydatne we wszelkich has³ach dostêpu, licencjach na oprogramowanie).
+Oprócz tego nale¿y w modelu zdefiniowaæ flagê \verb+can_owner_edit+ -- czy w³a¶ciciel mo¿e edytowaæ dany zasób (co jest potrzebne w celu unikniêcia znikania kosztownych zasobów z rejestru) oraz flagê \verb+can_others_read+ -- czy u¿ytkownicy niebêd±cy w³a¶cicielami mog± dany zasób widzieæ (przydatne we wszelkich has³ach dostêpu, licencjach na oprogramowanie).
 
 W celu realizacji tego, pos³u¿yli¶my siê metaklasami pythona. Dziêki ich wykorzystaniu definicja modelu zajmuje kilkana¶cie linijek, a poza modelem nale¿y jedynie stworzyæ formularz edycyjny.
 
@@ -444,11 +460,11 @@ W celu realizacji tego, pos³u¿yli¶my siê metaklasami pythona. Dziêki ich wykorzy
 
 W celu zapamiêtania historii zmian w bazie danych zosta³o zaimplementowane wersjonowanie. Zosta³ do tego wykorzystany dodatego do Django o nazwie \verb+django-reversion+. Zapamiêtuje on wszystkie dokonane zmiany instancji djangowych modeli(np. u¿ytkownika, zasobu, wniosku o urlop) oraz pozwala na ³atwe przywracanie poprzednich wersji.
 
-Dziêki u¿yciu wersjonowania administratorzy posiadaj± kompletn± historiê zmian, co rozwi±zuje problem niechcianych zmian(np. pomy³ek) w aplikacji eenet.
+Dziêki u¿yciu wersjonowania administratorzy posiadaj± kompletn± historiê zmian, co rozwi±zuje problem niechcianych zmian (np. pomy³ek) w aplikacji eenet.
 
 
 %TODO Patryk
-\chapter{W³o¿ona w projekt praca}\label{r:wlozonapraca}
+\chapter{W³o¿ona w projekt praca}\label{r:praca}
 
 \textit{Do zrobienia.}
 
@@ -462,16 +478,10 @@ Aplikacja eenet znajduje siê pod adresem \url{https://eenet.laboratorium.ee}.
 Wtyczki zawarte w niej zgodnie z za³o¿eniem zamawiaj±cego s± u¿ywane przez pracowników firmy Laboratorium EE. O sukcesie ¶wiadczy ponad 50 zarejestrowanych u¿ytkowników oraz du¿a liczba zg³oszonych przez nich uwag odno¶nie aplikacji. Uwagi zg³aszane przez u¿ytkowników mia³y ró¿norakie pod³o¿e, poczynaj±c od b³êdów w t³umaczeniach, przechodz±c przez uwagi dotycz±cye zmian w interfejsie u¿ytkownika, a koñcz±c na pro¶bach o dodanie nowej logiki w aplikacji. Ponadto planowane jest dalsze rozwijanie aplikacji przez przysz³ych praktykantów w Laboratorium EE. Co wiêcej, planowana jest sprzeda¿ eenetu w pakiecie wraz z innymi produktami firmy przeznaczonymi dla ma³ych i ¶rednich przedsiêbiorstw. 
 
 \section{Tworzenie produktu}
-Sposób w jaki powsta³a aplikacja, czas jej wykonania oraz jako¶æ wykonania zadowoli³ klienta na tyle, ¿e wszystkim cz³onkom zespo³u zosta³a zaproponowana dalsza wspó³praca, w nowych projektach.
+Sposób w jaki powsta³a aplikacja, czas jej wykonania oraz jako¶æ wykonania zadowoli³ klienta na tyle, ¿e wszystkim cz³onkom zespo³u zosta³a zaproponowana dalsza wspó³praca w nowych projektach.
 
 \textit{Dalsza czê¶æ do zrobienia.}
 
-
-%TODO niby all ale i tak bedzie musiala napisac to jedna osoba - nie robert
-%FIXME do wywalenia bo pokrywa sie z oraca wlozana w projekt(chyba zeby tam wypisac co zostalo zrobione a tu kto co konkretnie zrobil, do uzgodnienia)
-\chapter{Wykonana praca przez poszczególne osoby w projekcie}\label{r:ktopraca}
-
-\textit{Do zrobienia.}
 
 %TODO niby all ale i tak bedzie musiala napisac to jedna osoba - nie robert; moge to zrobic(borys) jak ktos mi powie co tu ma sie znalezc, bo nie wiem
 \chapter{Zawarto¶æ kodu dostarczonego wraz z prac±}\label{r:kod}

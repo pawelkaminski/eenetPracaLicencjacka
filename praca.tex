@@ -161,8 +161,8 @@ K\^un (fooistyczny mêdrzec, XIX w. p.n.e.):
 \item ma³e i ¶rednie przedsiêbiorstwa -- firmy zatrudniaj±ce od 10 do 250 pracowników;
 \item UI (ang. \textit{User Interface}) -- interfejs u¿ytkownika -- czê¶æ aplikacji odpowiedzialna za interakcjê z odbiorc± koñcowym;
 \item \textit{open source} -- otwarte oprogramowanie -- oprogramowanie, którego licencja pozwala na legalne i nieodp³atne kopiowane zarówno kodu wynikowego jak i ¼ród³owego oraz na dowolne modyfikacje kodu ¼ród³owego;
-\item OAuth -- otwarty standard autoryzuj±cy, pozwalaj±cy u¿ytkownikom dzieliæ swoje zasoby(np. dane, kontakty, zdjêcia) przechowywane na jednej stronie z inn± stron±. Dziêki temu mo¿na u¿ywaæ jednego konta(np. Google, Facebook, Twitter itp.) do logwania siê w wielu miejscach.
-
+\item OAuth -- otwarty standard autoryzuj±cy, pozwalaj±cy u¿ytkownikom dzieliæ swoje zasoby(np. dane, kontakty, zdjêcia) przechowywane na jednej stronie z inn± stron±. Dziêki temu mo¿na u¿ywaæ jednego konta(np. Google, Facebook, Twitter itp.) do logwania siê w wielu miejscach;
+\item RGB (ang. Red Green Blue) -- jeden z modeli przestrzeni barw, opisywany trzema wspó³rzêdnymi: czerwon±, zielon± i niebiesk±.
 \end{itemize}
 
 %TODO Robert
@@ -353,11 +353,37 @@ Administrator mo¿e akceptowaæ, odrzucaæ lub cofaæ do poprawki wniski ju¿ zaakcep
 
 \section{Zasoby}\label{r:zasoby}
 
+\subsection{Opis}
+G³ównym zadaniem wtyczki Zasoby jest zarz±dzanie oraz inwenteryzacja mienia fizycznego oraz cyfrowego firmy. Wtyczka umo¿liwa zarz±dzanie szeregiem predefiniowanych rodzajów dóbr, takich jak:
+\begin{itemize}
+\item biura,
+\item monitory,
+\item klucze ssh,
+\item licencje,
+\item itp...
+\end{itemize}
+
+Ka¿dy rodzaj zasobu ma oddzielne uprawnienia dostêpu, np: ka¿dy mo¿e stworzyæ swój klucz ssh, lecz tylko administrator mo¿e tworzyæ nowe biura.
+
+\subsection{Uprawnienia}
+Ka¿dy u¿ytkownik mo¿e zarz±daæ zasobami, których jest w³a¶cicielem oraz przegl±daæ ogólno dostêpne zasoby.
+
+Administratorzy mog± zarz±daæ wszystkimi zasobami.
+
 
 
 \section{Kafle}\label{r:kafle}
 
+\subsection{Opis}
+Strona g³ówna aplikacji eenet zawiera w sobie szereg kafli, które spe³niaj± funkcjê obrazkowego menu. Ka¿dy kafel jest odnosnikiem do jakiej¶ podstrony lub strony zewnêtrznej. Wtyczka kafle powsta³a, by móc w ³atwy sposób tworzyæ odno¶niki do stron zewnêtrznych. Wtyczka ta pozwala na przegl±danie, edycjê i usuwanie ju¿ istniej±cych kafli oraz tworzenie nowych. Aby stworzyæ nowy kafel nale¿y podaæ:
+\begin{itemize}
+\item url(link), na który ma przekierowywaæ kafel;
+\item kolor t³a w formacie RGB;
+\item utl obrazka(opcjonalnie), który pojawi siê w kaflu.
+\end{itemize}
 
+\subsection{Uprawnienia}
+Dostêp do wtyczni Kafle maj± tylko administratorzy.
 
 
 %TODO Patryk
@@ -402,12 +428,6 @@ W celu zapamiêtania historii zmian w bazie danych zosta³o zaimplementowane wersj
 Dziêki u¿yciu wersjonowania administratorzy posiadaj± kompletn± historiê zmian, co rozwi±zuje problem niechcianych zmian(np. pomy³ek) w aplikacji eenet.
 
 
-%TODO Patryk
-\chapter{W³o¿ona w projekt praca}\label{r:wlozonapraca}
-
-
-% TODO tutaj co¶ na kszta³t timeline'u kiedy kto co robi³
-% i krotkie podsumowanie ile linii kodu pythona, javascriptu napisano (?)
 
 %TODO Pawe³
 \chapter{Osi±gniêcia}\label{r:osiagniecia}

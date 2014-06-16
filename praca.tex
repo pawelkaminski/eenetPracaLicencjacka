@@ -414,7 +414,7 @@ Oprócz standardowych uprawnieñ \verb+admin+ i \verb+access+ przewidziano równie¿
 \subsection{Opis}
 Na stronie g³ównej aplikacji eenet znajduj± siê kafle wzorowane na Metro UI z Windows 8. Klikniêcie na taki kafel pozwala przej¶æ do wybranej aplikacji, przy okazji na kaflu mog± byæ umieszczone podsumowanie najwa¿niejszych informacji jakie dana wtyczka ma za zadanie zaprezentowaæ.
 
-Sama wtyczka Kafle s³u¿y do tego, ¿eby oprócz kafli zwi±zanych z wtyczkami móc tworzyæ kafle niestandardowe, które mo¿na tworzyæ bez modyfikacji kodu zrêbu. Przy pomocy wtyczki Kafle mo¿na takie kafle tworzyæ, ustawiaæ im kolor t³a, tekst, obrazek i URL otwierany po ich klikniêciu.
+Sama wtyczka Kafle s³u¿y do tego, ¿eby oprócz kafli zwi±zanych z wtyczkami móc tworzyæ kafle niestandardowe, które mo¿na tworzyæ bez modyfikacji kodu zrêbu. Przy pomocy wtyczki Kafle mo¿na takie kafle tworzyæ, ustawiaæ im kolor t³a (w przestrzeni RGB), tekst, obrazek i URL otwierany po ich klikniêciu.
 
 \subsection{Uprawnienia}
 Ka¿dy u¿ytkownik widzi niestandardowe kafle na stronie g³ównej. Tylko administrator wtyczki Kafle mo¿e tworzyæ, modyfikowaæ, usuwaæ kafle.
@@ -505,6 +505,18 @@ Sposób w jaki powsta³a aplikacja, czas jej wykonania oraz jako¶æ wykonania zadow
 %TODO niby all ale i tak bedzie musiala napisac to jedna osoba - nie robert; moge to zrobic(borys) jak ktos mi powie co tu ma sie znalezc, bo nie wiem
 \chapter{Zawarto¶æ kodu dostarczonego wraz z prac±}\label{r:kod}
 
+Kod ¼ród³owy zasadniczej czê¶ci zrêbu znajduje siê w katalogu \verb+eenet+.
+Kody ¼ród³owe poszczególnych wtyczek znajduj± siê w katalogach:
+\begin{itemize}
+\item{U¿ytkownicy} -- \verb+custom_user+
+\item{Zasoby} -- \verb+resources+
+\item{Urlopy} -- \verb+urlopownik+
+\item{Powiadomienia} -- \verb+notifications+
+\item{Kafle} -- \verb+tileswithlinks+
+\end{itemize}
+
+W pliku \verb+README.md+ znajduje siê instrukcja instalowania eenetu -- zarówno wersji deweloperskiej, jak i produkcyjnej. Procedura instalacji zosta³a przewidziana na system operacyjny Debian ,,wheezy'' (7.0) z pow³ok± bash.
+
 
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliografia}
@@ -512,7 +524,7 @@ Sposób w jaki powsta³a aplikacja, czas jej wykonania oraz jako¶æ wykonania zadow
 \bibitem{angularjs} Dokumentacja AngularJS -- \url{https://docs.angularjs.org/api}
 \bibitem{django} Dokumentacja Django -- \url{https://docs.djangoproject.com/en/1.6/}
 \bibitem{spa} Marcio Galli, \textit{Inner-browsing extending the browser navigation paradigm}, \url{https://developer.mozilla.org/en-US/docs/Inner-browsing_extending_the_browser_navigation_paradigm}
-\bibitem{jquery} Dokumentacja jQuery -- \url{http://lodash.com/docs}
+\bibitem{jquery} Dokumentacja jQuery -- \url{http://api.jquery.com/}
 \bibitem{lodash} Dokumentacja Lo-dash -- \url{http://lodash.com/docs}
 \bibitem{postgres} Dokumentacja PostgreSQL -- \url{http://www.postgresql.org/docs/}
 

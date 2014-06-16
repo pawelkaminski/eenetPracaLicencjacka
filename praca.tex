@@ -106,8 +106,8 @@
 Przedmiotem pracy licencjackiej jest opis zrêbu oraz jego implementacja wraz z przyk³adowymi aplikacjami.
 Projekt zosta³ zlecony przez firmê Laboratorium EE\footnote{\url{http://laboratorium.ee/}}.
 Klient zwróci³ sie do nas, gdy¿ potrzebowa³ narzêdzi do usprawnienia zarz±dzania firm± oraz do podniesienia poziomu komunikacji wewn±trz niej.
-Problemy zleceniodawcy wyniknê³y z szybkiego ekspansywnego rozwoju firmy.
-Aplikacja powsta³a w wyniku naszej pracy zosta³a nazwana EEnet, gdy¿ ma ³±czyæ pracowników firmy.
+Problemy zleceniodawcy wyniknê³y z szybkiego rozwoju firmy.
+Aplikacja powsta³a w wyniku naszej pracy zosta³a nazwana eenet, gdy¿ ma ³±czyæ pracowników firmy.
 
 Praca sk³ada siê z~9 rozdzia³ów i~dodatków:
 \begin{itemize}
@@ -118,7 +118,7 @@ Praca sk³ada siê z~9 rozdzia³ów i~dodatków:
 \item[\ref{r:wtyczki}]       -- opis dzia³ania poszczególnych gotowych wtyczek wraz z opisem ich logiki biznesowej i uprawnieñ u¿ytkowników,
 \item[\ref{r:rozwiazania}]   -- konkretne rozwi±zania implementacyjne, które nie wynika³y wprost z zaprezentowanej przez klienta logiki biznesowej,
 \item[\ref{r:praca}]         -- analiza wykonanej pracy nad projektem,
-\item[\ref{r:osiagniecia}]   -- dotychczasowe osi±gniêcia zrêbu eenet oraz naszego zespo³u.
+\item[\ref{r:podsumowanie}]  -- podsumowanie dotychczasowych osi±gniêæ zrêbu eenet oraz naszego zespo³u.
 
 \end{itemize}
 
@@ -133,10 +133,10 @@ Praca sk³ada siê z~9 rozdzia³ów i~dodatków:
 \item eenet -- nazwa w³asna opisywanego zrêbu;
 \item Laboratorium EE -- firma zg³aszaj±ca zapotrzebowanie na eenet;
 \item wtyczka -- aplikacja korzystaj±ca z udogodnieñ ¶rodowiska zapewnianego przez eenet;
-\item wtyczki przyk³adowe -- wtyczki, których stworzenie jest przewidziane w ramach wykonania aplikacji eenet;
+\item wtyczki przyk³adowe -- wtyczki, które stworzono w ramach wykonania aplikacji eenet;
 \item przegl±darka internetowa - program instalowany na urz±dzeniu u¿ytkownika, umo¿liwiaj±cy wy¶wietlanie stron WWW dostarczanych przez serwer;
-\item serwer produkcyjny -- komputer serwuj±cy stronê WWW, posiada bazê danych aplikacji;
-\item serwer developerski (testowy) -- maszyna, która s³u¿y do testowania ka¿dej wersji aplikacji, zanim ta trafi na serwer produkcyjny;
+\item serwer produkcyjny -- komputer serwuj±cy stronê WWW, tu te¿ jest baza danych aplikacji;
+\item serwer deweloperski (testowy) -- maszyna, która s³u¿y do testowania ka¿dej wersji aplikacji, zanim ta trafi na serwer produkcyjny;
 \item kopia bezpieczeñstwa -- informacje, które maj± s³u¿yæ do odtworzenia oryginalnych danych znajduj±cych siê na serwerze produkcyjnym, w przypadku ich utraty lub uszkodzenia;
 \item front-end -- czê¶æ kodu zapewniaj±ca graficzny i testowy interfejs, jest interpretowana przez przegl±darkê tzn. dzia³a po stronie u¿ytkownika;
 \item back-end -- czê¶æ kodu dzia³aj±ca po stronie serwera, odpowiada za logikê operacji na danych;
@@ -150,7 +150,7 @@ Praca sk³ada siê z~9 rozdzia³ów i~dodatków:
 \item HTML (ang. \textit{HyperText Markup Language}) -- deklaratywny jêzyk opisu tre¶ci strony;
 \item DOM (ang. \textit{Document Object Model}) -- drzewiasta reprezentacja strony HTML, trzymana w pamiêci przegl±darki;
 \item CSS (ang. \textit{Cascading Style Sheets}) -- deklaratywny jêzyk opisu stylowania elementów HTML;
-\item responsywno¶æ -- zdolno¶æ strony do aran¿acji uk³adu tre¶ci w zale¿no¶ci od szeroko¶ci okna przegl±darki b±d¼ urz±dzenia, na którym stronê siê przegl±da;
+\item RWD (ang. \textit{Responsive Web Design}) -- technika projektowania strony WWW tak, aby uk³ad tre¶ci dostosowywa³ siê automatycznie do szeroko¶ci okna przegl±darki b±d¼ szeroko¶ci ekranu urz±dzenia, na którym stronê siê przegl±da. Stronê wykonan± w tej technice nazywamy responsywn±;
 \item JS (ang. \textit{JavaScript}) -- jêzyk skryptowy odpowiedzialny za zapytania AJAX i manipulacjê drzewem DOM;
 \item AJAX (ang. \textit{Asynchronous JavaScript and XML}) -- technika pozwalaj±ca na wykonywanie asynchronicznych zapytañ HTTP do API;
 \item ma³e i ¶rednie przedsiêbiorstwa -- firmy zatrudniaj±ce od 10 do 250 pracowników;
@@ -170,19 +170,19 @@ Okazuje siê, ¿e przy zarz±dzaniu firm± do wielu problemów nie wystarczaj± arkusz
 Jako, ¿e nie nikt nie by³ i nigdy nie bêdzie w stanie zdefiniowaæ ostatecznych wymagañ dla problemu zarz±dzania firm±, zdecydowali¶my ¿e najlepszym rozwi±zaniem bêdzie stworzenie zrêbu.
 
 Takie rozwi±zanie zapewnia ³atw± w~przysz³o¶ci rozszerzalno¶æ, w~dodatku dziêki posiadaniu ¶rodowiska s³u¿±cego do tworzenia i~obs³ugi aplikacji biurowych,
-mo¿na znacznie ograniczyæ koszty pisania poszczególnych funkcjonalno¶ci. ¦rodowisko bêdzie zapewnia³o pomocnicze funkcjonalno¶ci wtyczkom (np. dostêp do bazy danych, logowanie u¿ytkowników, uprawnienia) -- wtyczki dziêki temu nie bêd± musia³y same siê zajmowaæ tymi kwestiami, takie rozumowanie jest zgodne z zasad± DRY.
+mo¿na znacznie ograniczyæ koszty pisania poszczególnych funkcjonalno¶ci. ¦rodowisko zapewnia pomocnicze funkcjonalno¶ci wtyczkom (np. dostêp do bazy danych, logowanie u¿ytkowników, uprawnienia) -- wtyczki dziêki temu nie musz± same siê zajmowaæ tymi kwestiami -- takie rozumowanie jest zgodne z zasad± DRY.
 
 Dodatkow± zalet± jest ujednolicenie podej¶cia, jakie nale¿y zastosowaæ pisz±c tak± aplikacjê -- dziêki temu bêdzie mo¿na ³atwo wdro¿yæ nowego programistê aplikacji.
-Oczywi¶cie takie ujednolicenie wi±¿e siê z narzuceniem pewnych barier, lecz w naszej ocenie przy rozwi±zywaniu tego typu problemu ograniczenia pojawia siê wcze¶niej czy pó¼niej, wiêc lepiej ustanowiæ je na samym pocz±tku.
+Oczywi¶cie takie ujednolicenie wi±¿e siê z narzuceniem pewnych barier, lecz w naszej ocenie przy rozwi±zywaniu tego typu problemu ograniczenia pojawi± siê wcze¶niej czy pó¼niej, wiêc lepiej ustanowiæ je na samym pocz±tku.
 
 \section{Wymagania}
 
 Samo stworzenie ¶rodowiska nie rozwi±¿e jednak obecnych problemów zleceniodawcy, utworzyli¶my wiêc kilka podstawowych wtyczek pomagaj±cych Laboratorium EE.
 W~pocz±tkowej fazie negocjacji z~klientem wynik³y nastêpuj±ce wymagania dotycz±ce zestawu ,,zr±b + gotowe wtyczki'':
 \begin{itemize}
- \item Udostepniæ zaawansowany system zarz±dzania u¿ytkownikami.
- \item Stworzyæ mechanizmy do inwentaryzacji dóbr i informacji.
- \item Zautomatyzowaæ proces sk³adania pró¶b o urlopy w firmie.
+ \item udostêpnienie zaawansowanego systemu zarz±dzania u¿ytkownikami,
+ \item stworzenie mechanizmu do inwentaryzacji dóbr i informacji,
+ \item zautomatyzowanie procesu sk³adania pró¶b o urlopy w firmie.
 \end{itemize}
 Jako podstawê aplikacji stworzyli¶my trzy wtyczki:
 \begin{itemize}
@@ -190,7 +190,7 @@ Jako podstawê aplikacji stworzyli¶my trzy wtyczki:
  \item \nameref{r:powiadomienia}
  \item \nameref{r:kafle}
 \end{itemize}
-Dwie kolejne rozwi±zuj± problemy z inwentaryzacj± i urlopami:
+Dwie kolejne napisane przez nas wtyczki rozwi±zuj± problemy z inwentaryzacj± i urlopami:
 \begin{itemize}
  \item \nameref{r:urlopy}
  \item \nameref{r:zasoby}
@@ -205,9 +205,9 @@ Do koñcowej implementacji projektu eenet zosta³ dodany podrêcznik u¿ytkownika or
 \section{Atlassian}
 Firma Atlassian dostarcza szeroki wachlarz aplikacji do zarz±dzania prac±. Ka¿da z funkcjonalno¶ci jest oddzieln± aplikacj±. Jest to zdecydowanie najlepiej wykonane narzêdzie na rynku jednak¿e cena ka¿dej z funkcjonalno¶ci jest bardzo wysoka i zwykle tylko du¿e przedsiêbiorstwa staæ na wykup potrzebnych licencji.
 \section{AppFlower}
-Framework z otwartym ¼ród³em do tworzenia ma³ych aplikacji, nie wymagaj±cy programowania, pozwalaj±cy na budowanie aplikacji z klocków. Plusem tego rozwi±zania jest to ¿e jest darmowy i otwarty, natomiast minusem fakt, ¿e budowane w nim aplikacje nie pozwalaj± na zaimplementowanie zaawansowanej logiki biznesowej.
+Framework z otwartym ¼ród³em do tworzenia ma³ych aplikacji, nie wymagaj±cy programowania, pozwalaj±cy na budowanie aplikacji z klocków. Plusem tego rozwi±zania jest to, ¿e jest darmowy i otwarty, natomiast minusem fakt, ¿e budowane w nim aplikacje nie pozwalaj± na zaimplementowanie zaawansowanej logiki biznesowej.
 \section{OpenBiz AppBuilder}
-P³atny framework do tworzenia ma³ych aplikacji, pozwalaj±cy na handlowanie nimi. Mocn± stron± tego rozwi±zania jest do¶æ du¿a dowolno¶æ w tworzeniu nowych aplikacji, natomiast s³ab± -- jej do¶æ wysoka cena oraz brak dobrej dokumentacji do ¶rodowiska tworzenia nowych wtyczek.
+P³atny zr±b do tworzenia ma³ych aplikacji, pozwalaj±cy na handlowanie nimi. Mocn± stron± tego rozwi±zania jest do¶æ du¿a dowolno¶æ w tworzeniu nowych aplikacji, natomiast s³ab± -- jej do¶æ wysoka cena oraz brak dobrej dokumentacji do ¶rodowiska tworzenia nowych wtyczek.
 
 
 %TODO Patryk
@@ -215,15 +215,15 @@ P³atny framework do tworzenia ma³ych aplikacji, pozwalaj±cy na handlowanie nimi.
 
 \section{Ogólna struktura projektu}
 
-Zdecydowali¶my siê na realizacjê aplikacji internetowej jako interaktywnej strony WWW, co jest naturalnym wyborem zwa¿ywszy na to ile narzêdzi obecnie jest dostêpnych w ten sposób. Dodatkowo za³o¿yli¶my, ¿e nasza strona powinna spe³niaæ wzorzec \textit{single-page application}, który wymusza ¶cis³y podzia³ projektu na API i GUI.
+Zdecydowali¶my siê na realizacjê aplikacji internetowej jako interaktywnej strony WWW, co jest naturalnym wyborem zwa¿ywszy na to, ile narzêdzi obecnie jest dostêpnych w ten sposób. Dodatkowo za³o¿yli¶my, ¿e nasza strona powinna spe³niaæ wzorzec \textit{single-page application}, który wymusza ¶cis³y podzia³ projektu na API i GUI.
 
 \section{Back-end: instalacja projektu}
 
-Back-end eenetu zosta³ stworzony we frameworku Django. S³u¿y on nastêpuj±cym celom:
+Back-end eenetu zosta³ stworzony w zrêbie Django. S³u¿y on nastêpuj±cym celom:
 \begin{itemize}
 \item zapewnia mechanizm sesji zalogowanego u¿ytkownika,
 \item po¶redniczy w logowaniu i autoryzacji OAuth,
-\item zawiera w sobie koñcówki API, z którymi komunikuje siê GUI.
+\item realizuje API, z którymi komunikuje siê GUI.
 \end{itemize}
 
 Do uruchomienia aplikacji w trybie deweloperskim (przy ustawionym \verb+DEBUG = True+ w ustawieniach projektu) wystarczy sam kod zapewniany przez Django, mianowicie plik
@@ -231,22 +231,22 @@ Do uruchomienia aplikacji w trybie deweloperskim (przy ustawionym \verb+DEBUG = 
 
 Do instalacji produkcyjnej potrzeba jednak po¶rednicz±cego serwera-bramy, który zajmie siê serwowaniem plików statycznych i przekierowaniem odpowiednich ¿±dañ do Django. Zdecydowali¶my siê na serwer nginx z powodu popularno¶ci takiego po³±czenia Django - nginx. Oczywi¶cie zawsze jest mo¿liwo¶æ zmiany serwera-bramy na np. Apache2 czy lighttpd.
 
-Oprócz ustalenia serwera-bramy, nale¿y te¿ w jaki¶ sposób uruchomiæ serwer Django na produkcji. W tym celu u¿yli¶my narzêdzia supervisord, które powoduje, ¿e nie trzeba pisaæ osobnego daemona do procesu Django.
+Oprócz ustalenia serwera-bramy, nale¿y te¿ w jaki¶ sposób uruchomiæ serwer Django na serwerze produkcyjnym. W tym celu u¿yli¶my narzêdzia supervisord, które powoduje, ¿e nie trzeba pisaæ osobnego daemona do procesu Django.
 
-Eenet zosta³ przygotowany równie¿ na obs³ugê zadañ asynchronicznych -- czyli takich, które mo¿na zrobiæ osobnym procesem, nie spowalniaj±c renderowania odpowiedzi serwera. Przyk³adem tego mo¿e byæ pobieranie zdjêcia u¿ytkownika -- poniewa¿ autoryzacja u¿ytkowników odbywa siê przy pomocy Google OAuth, aplikacja eenet mo¿e wys³aæ ¿±danie do Google+ API o takowe zdjêcie. W celu wykonania tej funkcjonalno¶ci ponownie zwrócili¶my siê do rozwi±zañ popularnych -- wykorzystali¶my Celery, asynchroniczn± kolejkê zadañ w po³±czeniu z brokerem zadañ Rabbitmq.
+eenet zosta³ przygotowany równie¿ na obs³ugê zadañ asynchronicznych -- czyli takich, które mo¿na zrobiæ osobnym procesem, nie spowalniaj±c renderowania odpowiedzi serwera. Przyk³adem tego mo¿e byæ pobieranie zdjêcia u¿ytkownika -- poniewa¿ autoryzacja u¿ytkowników odbywa siê przy pomocy Google OAuth, aplikacja eenet mo¿e wys³aæ ¿±danie do Google+ API o takowe zdjêcie. W celu wykonania tej funkcjonalno¶ci ponownie zwrócili¶my siê do rozwi±zañ popularnych -- wykorzystali¶my Celery, asynchroniczn± kolejkê zadañ w po³±czeniu z brokerem zadañ Rabbitmq.
 
 Z uwagi na to, ¿e postawienie pe³nego produkcyjnego serwera posiada wiele zale¿no¶ci, sporz±dzili¶my instrukcjê, która prowadzi administratora aplikacji krok po kroku, zaczynaj±c od stawiania instalacji deweloperskiej, poprzez produkcyjn±, a¿ po uruchamianie zadañ asynchronicznych. Znajduje siê ona w pliku \verb+README.md+.
 
 \section{Back-end: implementacja API}
 
-Kluczow± rolê spe³nia wspomniany wcze¶niej framework Django. Oczekiwali¶my od back-endowego frameworku nastêpuj±cych funkcjonalno¶ci:
+Kluczow± rolê spe³nia wspomniany wcze¶niej zr±b Django. Oczekiwali¶my od back-endowego zrêbu nastêpuj±cych funkcjonalno¶ci:
 \begin{itemize}
-\item ³atwy dostêp do bazy danych SQL,
-\item sesje u¿ytkowników,
-\item interfejs do administracji danymi dla administratora,
-\item mechanizm autoryzacji OAuth kompatybilny z Google OAuth,
-\item mo¿liwo¶æ ³atwego stworzenia wielu koñcówek API dostêpnych pod ró¿nymi adresami URL,
-\item narzucenie ograniczeñ na dostêp do koñcówek w zale¿no¶ci od przywilejów poszczególnych u¿ytkowników.
+\item ³atwego dostêpu do bazy danych SQL,
+\item obs³ugi sesji u¿ytkowników,
+\item interfejsu do administracji danymi dla administratora,
+\item mechanizmu autoryzacji OAuth zgodnego z Google OAuth,
+\item mo¿liwo¶ci ³atwego stworzenia wielu koñcówek API dostêpnych pod ró¿nymi adresami URL,
+\item narzucenia ograniczeñ na dostêp do API w zale¿no¶ci od przywilejów poszczególnych u¿ytkowników.
 \end{itemize}
 
 Dostêp do bazy danych, sesje u¿ytkowników i interfejs administracyjny s± zapewnione przez samo Django. Do obs³ugi OAuth zdecydowali¶my siê na \verb+django-social-auth+ (pó¼niej projekt przeistoczy³ siê w \verb+python-social-auth+), natomiast do stworzenia API u¿yli¶my \verb+django-rest-framework+.
@@ -256,9 +256,9 @@ Przyjête przez nas rozwi±zania zdecydowanie u³atwi³y pracê z projektem i umo¿liw
 
 \section{Front-end: JavaScript}
 
-Koncepcja stron internetowych typu \textit{single-page application} pojawi³a siê w 2003 r. \cite{spa} i pierwsze realizacje zaczê³y pojawiaæ siê w podobnym czasie. Wówczas bardzo niszowe, obecnie staj± siê coraz bardziej popularne, g³ównie za spraw± implementacji w przegl±darkach History API i pojawieniu siê wielu frameworków zapewniaj±cych ³atwe tworzenie \textit{single-page application}, takich jak AngularJS, Backbone czy Ember.
+Koncepcja stron internetowych typu \textit{single-page application} pojawi³a siê w 2003 r. \cite{spa} i pierwsze realizacje zaczê³y pojawiaæ siê w podobnym czasie. Wówczas bardzo niszowe, obecnie staj± siê coraz bardziej popularne, g³ównie za spraw± implementacji w przegl±darkach History API i pojawieniu siê wielu zrêbów zapewniaj±cych ³atwe tworzenie \textit{single-page application}, takich jak AngularJS, Backbone czy Ember.
 
-Zdecydowali¶my siê na u¿ycie AngularJS g³ównie ze wzglêdu na popularno¶æ, przy okazji jest to projekt za którym stoj± deweloperzy Google'a, wiêc bardzo prawdopodobne, ¿e bêdzie w dalszym ci±gu rozwijany i wspierany.
+Zdecydowali¶my siê na u¿ycie AngularJS g³ównie ze wzglêdu na popularno¶æ, przy okazji jest to projekt, za którym stoj± deweloperzy Google'a, wiêc bardzo prawdopodobne, ¿e bêdzie w dalszym ci±gu rozwijany i wspierany.
 
 AngularJS zapewnia nam wzorzec MVW  -- \textit{model-view-whatever}\footnote{\url{https://plus.google.com/110323587230527980117/posts/aZNVhj355G2}}, stanowi±cy po³±czenie popularnych wzorców MVC -- \textit{model-view-controller} i MVVM -- \textit{model-view-viewmodel}.
 
@@ -267,7 +267,7 @@ Oprócz tego, AngularJS zapewnia:
 \item obs³ugê History API -- zmiana URLa przez JavaScript nie powoduje prze³adowania strony od nowa, tylko modyfikuje istniej±cy dokument HTML (¶ci¶lej drzewo DOM) tak, ¿eby uzyskaæ po¿±dany widok,
 \item podzia³ logiczny front-endu na kontrolery, szablony i serwisy,
 \item \textit{two-way data binding} - automatyczn± synchronizacjê tre¶ci miêdzy zawarto¶ci± strony (drzewem DOM), a warto¶ciami zmiennych w JavaScripcie,
-\item obiektowe podej¶cie do AJAXowej komunikacji z koñcówkami API dziêki serwisowi \verb+$resource+,
+\item obiektowe podej¶cie do AJAXowej komunikacji z API dziêki serwisowi \verb+$resource+,
 \item internacjonalizacjê tre¶ci strony przy pomocy \verb+ng-l20n+.
 \end{itemize}
 
@@ -275,9 +275,9 @@ Jak widaæ AngularJS spe³nia wiele zadañ. Na potrzeby eenetu wystarcza ca³kowicie
 
 \section{Front-end: CSS}
 
-Jêzyk HTML ma wbudowane podstawowe tagi, które spe³niaj± jasno okre¶lon± rolê w interfejsie (np. \verb+button+, \verb+select+), jednak¿e jest du¿a dowolno¶æ w kwestii wizualnego zaplanowania interfejsu. Zamiast wymy¶laæ strukturê stron HTML ca³kowicie od podstaw i pisaæ w³asne style CSS upiêkszaj±ce domy¶lne formatowanie, skorzystali¶my z biblioteki Bootstrap wykonanej przez firmê Twitter. Dziêki niej stworzyli¶my tak± strukturê HTML strony, któr± mo¿na ³atwo modyfikowaæ.
+Jêzyk HTML ma wbudowane podstawowe znaczniki, które spe³niaj± jasno okre¶lon± rolê w interfejsie (np. \verb+button+, \verb+select+), jednak¿e jest du¿a dowolno¶æ w kwestii wizualnego zaplanowania interfejsu. Zamiast wymy¶laæ strukturê stron HTML ca³kowicie od podstaw i pisaæ w³asne style CSS upiêkszaj±ce domy¶lne formatowanie, skorzystali¶my z biblioteki Bootstrap wykonanej przez firmê Twitter. Dziêki niej stworzyli¶my tak± strukturê HTML strony, któr± mo¿na ³atwo modyfikowaæ.
 
-Dodatkowo, style z Bootstrapa s± responsywne -- zatem nie musieli¶my siê przejmowaæ, ¿e trzeba napisaæ osobny kod HTML i osobne style dla u¿ytkowników smartfonów i tabletów.
+Dodatkowo, style z Bootstrapa s± responsywne -- zatem nie musieli¶my siê przejmowaæ tym, ¿e trzeba napisaæ osobny kod HTML i osobne style dla u¿ytkowników smartfonów i tabletów.
 
 
 
@@ -290,7 +290,7 @@ Dodatkowo, style z Bootstrapa s± responsywne -- zatem nie musieli¶my siê przejmo
 \section{U¿ytkownicy}\label{r:uzytkownicy}
 
 \subsection{Opis}
-Wtyczka U¿ytkownicy jest w zasadzie integraln± czê¶ci± frameworku eenet, jest ¶ci¶le powi±zana z logowaniem i autoryzacj± u¿ytkowników. Oprócz tego zapewnia system uprawnieñ -- ka¿da inna wtyczka mo¿e zdefiniowaæ we wtyczce U¿ytkownicy jakie uprawnienia s± dostêpne w ramach tej¿e wtyczki. Domy¶lnie ka¿da wtyczka definiuje uprawnienia:
+Wtyczka U¿ytkownicy jest w zasadzie integraln± czê¶ci± zrêbu eenet, jest ¶ci¶le powi±zana z logowaniem i autoryzacj± u¿ytkowników. Oprócz tego zapewnia system uprawnieñ -- ka¿da inna wtyczka mo¿e zdefiniowaæ we wtyczce U¿ytkownicy jakie uprawnienia s± dostêpne w ramach tej¿e wtyczki. Domy¶lnie ka¿da wtyczka definiuje uprawnienia:
 \begin{itemize}
 \item \verb+admin+ -- u¿ytkownik maj±cy to uprawnienie powinien móc zrobiæ wszystko, co jest dostêpne wewn±trz wtyczki,
 \item \verb+access+ -- u¿ytkownik maj±cy to uprawnienie powinien mieæ dostêp co najmniej do podstawowych funkcjonalno¶ci wtyczki.
@@ -318,17 +318,17 @@ Wy¶wietlanie wiadomo¶ci odbywa siê podobnie jak w portalach spo³eczno¶ciowych --
 
 \subsection{Uprawnienia}
 Ka¿dy u¿ytkownik mo¿e przegl±daæ otrzymane powiadomienia oraz je usuwaæ.
-Administrator nie posiada ¿adnych dodatkowych uprawnieñ.
+Administrator nie ma ¿adnych dodatkowych uprawnieñ.
 
 
 
 \section{Urlopy}\label{r:urlopy}
 
 \subsection{Opis}
-Wtyczka Urlopy pozwala na sk³adanie wniosków o przyznanie urlopu oraz zarz±dzanie nimi. Z ka¿dy u¿ytkownikiem zwi±zana jest liczba przys³uguj±cych mu wolnych dni do wykorzystania na urlopy.
+Wtyczka Urlopy pozwala na sk³adanie wniosków o przyznanie urlopu oraz zarz±dzanie nimi. Z ka¿dym u¿ytkownikiem zwi±zana jest liczba przys³uguj±cych mu wolnych dni do wykorzystania na urlopy.
 W odniesieniu do tej wtyczki administratorem jest osoba z uprawnieniem \verb+admin+ we wtyczce Urlopy.
-Z ka¿dym wnioskiem zwi±zana jest liczba dni roboczych w trakcie tego urlopu, która zostaje odjêta od ilo¶ci pozosta³ych dni wolnych danego u¿ytkownika.
-Wtyczka Urlopy pozwala tak¿e na zmianê (przez uprawnione osoby) ilo¶ci dni wolnych, przys³uguj±cych dowolnemu u¿ytkownikowi.
+Z ka¿dym wnioskiem zwi±zana jest liczba dni roboczych w trakcie tego urlopu, która zostaje odjêta od liczby pozosta³ych dni wolnych danego u¿ytkownika.
+Wtyczka Urlopy pozwala tak¿e na zmianê (przez uprawnione osoby) liczby dni wolnych, przys³uguj±cych dowolnemu u¿ytkownikowi.
 
 Dok³adniejsza logika biznesowa aplikacji znajduje siê w kolejnych podpunktach.
 
@@ -337,7 +337,7 @@ Dok³adniejsza logika biznesowa aplikacji znajduje siê w kolejnych podpunktach.
 Przyznawanie urlopów odbywa siê w kilku krokach:
 \begin{enumerate}
 \item
-	Urlopobiorca klika ,,Z³ó¿ pro¶bê'' w urlopowniku i wype³nia potrzebne dane:
+	Urlopobiorca klika przycisk ,,Z³ó¿ pro¶bê'' i wype³nia potrzebne dane:
 	\begin{itemize}
 	\item daty od-do urlopu,
 	\item typ urlopu,
@@ -414,7 +414,7 @@ Oprócz standardowych uprawnieñ \verb+admin+ i \verb+access+ przewidziano równie¿
 \subsection{Opis}
 Na stronie g³ównej aplikacji eenet znajduj± siê kafle wzorowane na Metro UI z Windows 8. Klikniêcie na taki kafel pozwala przej¶æ do wybranej aplikacji, przy okazji na kaflu mog± byæ umieszczone podsumowanie najwa¿niejszych informacji jakie dana wtyczka ma za zadanie zaprezentowaæ.
 
-Sama wtyczka Kafle s³u¿y do tego, ¿eby oprócz kafli zwi±zanych z wtyczkami móc tworzyæ kafle niestandardowe, które mo¿na tworzyæ bez modyfikacji kodu we frameworku. Przy pomocy wtyczki Kafle mo¿na takie kafle tworzyæ, ustawiaæ im kolor t³a, tekst, obrazek i URL otwierany po ich klikniêciu.
+Sama wtyczka Kafle s³u¿y do tego, ¿eby oprócz kafli zwi±zanych z wtyczkami móc tworzyæ kafle niestandardowe, które mo¿na tworzyæ bez modyfikacji kodu zrêbu. Przy pomocy wtyczki Kafle mo¿na takie kafle tworzyæ, ustawiaæ im kolor t³a, tekst, obrazek i URL otwierany po ich klikniêciu.
 
 \subsection{Uprawnienia}
 Ka¿dy u¿ytkownik widzi niestandardowe kafle na stronie g³ównej. Tylko administrator wtyczki Kafle mo¿e tworzyæ, modyfikowaæ, usuwaæ kafle.
@@ -425,7 +425,7 @@ Ka¿dy u¿ytkownik widzi niestandardowe kafle na stronie g³ównej. Tylko administra
 
 \section{Rozwi±zanie generyczne}
 
-W wielu przypadkach implementacja funkcjonalno¶ci eenetu sprowadza³a siê do postêpowania zgodnie z zasadami konkretnego frameworka czy biblioteki. Przyk³adowo, gdy chcieli¶my stworzyæ w aplikacji kafle z hiper³±czami na stronie g³ównej, nale¿a³o stworzyæ:
+W wielu przypadkach implementacja funkcjonalno¶ci eenetu sprowadza³a siê do postêpowania zgodnie z zasadami konkretnego zrêbu czy biblioteki. Przyk³adowo, gdy chcieli¶my stworzyæ w aplikacji kafle z hiper³±czami na stronie g³ównej, nale¿a³o stworzyæ:
 \begin{itemize}
 \item djangowy model kafla (w \verb+models.py+),
 \item koñcówkê API odpowiedzialn± za pobieranie, tworzenie, aktualizacjê, usuwanie kafla przy pomocy \verb+django-rest-framework+ (pliki \verb+views.py+, \verb+urls.py+, \verb+permissions.py+, \verb+serializers.py+),
@@ -458,7 +458,7 @@ W celu realizacji tego, pos³u¿yli¶my siê metaklasami pythona. Dziêki ich wykorzy
 
 \section{Wersjonowanie}
 
-W celu zapamiêtania historii zmian w bazie danych zosta³o zaimplementowane wersjonowanie. Zosta³ do tego wykorzystany dodatego do Django o nazwie \verb+django-reversion+. Zapamiêtuje on wszystkie dokonane zmiany instancji djangowych modeli(np. u¿ytkownika, zasobu, wniosku o urlop) oraz pozwala na ³atwe przywracanie poprzednich wersji.
+W celu zapamiêtania historii zmian w bazie danych zosta³o zaimplementowane wersjonowanie. Zosta³ do tego wykorzystany dodatek do Django o nazwie \verb+django-reversion+. Zapamiêtuje on wszystkie dokonane zmiany instancji djangowych modeli (np. u¿ytkownika, zasobu, wniosku o urlop) oraz pozwala na ³atwe przywracanie poprzednich wersji.
 
 Dziêki u¿yciu wersjonowania administratorzy posiadaj± kompletn± historiê zmian, co rozwi±zuje problem niechcianych zmian (np. pomy³ek) w aplikacji eenet.
 
@@ -466,21 +466,20 @@ Dziêki u¿yciu wersjonowania administratorzy posiadaj± kompletn± historiê zmian, 
 %TODO Patryk
 \chapter{W³o¿ona w projekt praca}\label{r:praca}
 
-\textit{Do zrobienia.}
+\textit{TODO Do zrobienia.}
 
 % TODO tutaj co¶ na kszta³t timeline'u kiedy kto co robi³
 % i krotkie podsumowanie ile linii kodu pythona, javascriptu napisano (?)
 
 %TODO Pawe³
-\chapter{Osi±gniêcia}\label{r:osiagniecia}
-\section{Produkt}
+\chapter{Podsumowanie}\label{r:podsumowanie}
+
 Aplikacja eenet znajduje siê pod adresem \url{https://eenet.laboratorium.ee}.
 Wtyczki zawarte w niej zgodnie z za³o¿eniem zamawiaj±cego s± u¿ywane przez pracowników firmy Laboratorium EE. O sukcesie ¶wiadczy ponad 50 zarejestrowanych u¿ytkowników oraz du¿a liczba zg³oszonych przez nich uwag odno¶nie aplikacji. Uwagi zg³aszane przez u¿ytkowników mia³y ró¿norakie pod³o¿e, poczynaj±c od b³êdów w t³umaczeniach, przechodz±c przez uwagi dotycz±cye zmian w interfejsie u¿ytkownika, a koñcz±c na pro¶bach o dodanie nowej logiki w aplikacji. Ponadto planowane jest dalsze rozwijanie aplikacji przez przysz³ych praktykantów w Laboratorium EE. Co wiêcej, planowana jest sprzeda¿ eenetu w pakiecie wraz z innymi produktami firmy przeznaczonymi dla ma³ych i ¶rednich przedsiêbiorstw. 
 
-\section{Tworzenie produktu}
 Sposób w jaki powsta³a aplikacja, czas jej wykonania oraz jako¶æ wykonania zadowoli³ klienta na tyle, ¿e wszystkim cz³onkom zespo³u zosta³a zaproponowana dalsza wspó³praca w nowych projektach.
 
-\textit{Dalsza czê¶æ do zrobienia.}
+\textit{TODO Dalsza czê¶æ do zrobienia.}
 
 
 %TODO niby all ale i tak bedzie musiala napisac to jedna osoba - nie robert; moge to zrobic(borys) jak ktos mi powie co tu ma sie znalezc, bo nie wiem
@@ -490,12 +489,12 @@ Sposób w jaki powsta³a aplikacja, czas jej wykonania oraz jako¶æ wykonania zadow
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliografia}
 
-\bibitem{angularjs} Dokumentacja AngularJS - \url{https://docs.angularjs.org/api}
-\bibitem{lodash} Dokumentacja Lo-dash - \url{http://lodash.com/docs}
-\bibitem{jquery} Dokumentacja jQuery - \url{http://lodash.com/docs}
-\bibitem{django} Dokumentacja Django - \url{https://docs.djangoproject.com/en/1.6/}
-\bibitem{postgres} Dokumentacja PostgreSQL - \url{http://www.postgresql.org/docs/}
+\bibitem{angularjs} Dokumentacja AngularJS -- \url{https://docs.angularjs.org/api}
+\bibitem{django} Dokumentacja Django -- \url{https://docs.djangoproject.com/en/1.6/}
 \bibitem{spa} Marcio Galli, \textit{Inner-browsing extending the browser navigation paradigm}, \url{https://developer.mozilla.org/en-US/docs/Inner-browsing_extending_the_browser_navigation_paradigm}
+\bibitem{jquery} Dokumentacja jQuery -- \url{http://lodash.com/docs}
+\bibitem{lodash} Dokumentacja Lo-dash -- \url{http://lodash.com/docs}
+\bibitem{postgres} Dokumentacja PostgreSQL -- \url{http://www.postgresql.org/docs/}
 
 \end{thebibliography}
 
